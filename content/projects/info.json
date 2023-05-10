@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Tombolo",
+    "slug": "tombolo",
+    "image": "https://via.placeholder.com/300x200",
+    "image-description": "Tombolo image",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sapien a augue lacinia, sed scelerisque dolor congue. Donec ultrices, urna id fringilla fringilla, mi orci aliquam sapien, eu suscipit tortor velit quis velit."
+  },
+  {
+    "title": "Auth-Service",
+    "slug": "auth-service",
+    "image": "https://via.placeholder.com/300x200",
+    "image-description": "Authservice image",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sapien a augue lacinia, sed scelerisque dolor congue. Donec ultrices, urna id fringilla fringilla, mi orci aliquam sapien, eu suscipit tortor velit quis velit."
+  },
+  {
+    "title": "Real-BI",
+    "slug": "real-bi",
+    "image": "https://via.placeholder.com/300x200",
+    "image-description": "Real-BI  image",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sapien a augue lacinia, sed scelerisque dolor congue. Donec ultrices, urna id fringilla fringilla, mi orci aliquam sapien, eu suscipit tortor velit quis velit."
+  },
+  {
+    "title": "New-BI",
+    "slug": "new-bi",
+    "image": "https://via.placeholder.com/300x200",
+    "image-description": "Real-BI  image",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur sapien a augue lacinia, sed scelerisque dolor congue. Donec ultrices, urna id fringilla fringilla, mi orci aliquam sapien, eu suscipit tortor velit quis velit."
+  }
+]
