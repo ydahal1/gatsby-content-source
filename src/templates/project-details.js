@@ -1,18 +1,20 @@
 import { graphql } from "gatsby";
 import React from "react";
+import { Card } from "antd";
+
 
 function ProjectDetails({ data }) {
   const { html } = data.markdownRemark;
-  const { image, image_description, project_description, slug, title } =
+  const { image, title } =
     data.markdownRemark.frontmatter;
   return (
-    <div>
-      <h1>{title}</h1>
-      <div>
-        <img src={image} alt="Girl in a jacket" />
-        <div dangerouslySetInnerHTML={{ __html: html }}></div>
-      </div>
-    </div>
+      <Card>
+        <h1>{title}</h1>
+        <div>
+          <img src={image} alt={title} />
+          <div dangerouslySetInnerHTML={{ __html: html }}></div>
+        </div>
+      </Card>
   );
 }
 

@@ -1,5 +1,4 @@
 const path = require("path");
-const jsonData = require("./content/projects/info.json"); // Replace with the path to your JSON file
 
 exports.createPages = async ({ graphql, actions }) => {
   const { data } = await graphql(`

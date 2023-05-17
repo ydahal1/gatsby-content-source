@@ -1,0 +1,22 @@
+.header__menu > * {
+  font-weight: 700;
+  font-size: large;
+  margin-right: 12px !important;
+}
+
+.header__menuItem:hover {
+  font-size: larger;
+}
+
+.footer_socialIcons {
+  font-size: 20px;
+  color: gray;
+}
+
+.footer_socialIcons > * {
+  margin-right: 10px;
+}
+
+.header__items_right > * {
+  margin-left: 15px;
+}
