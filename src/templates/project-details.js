@@ -1,13 +1,13 @@
 import { graphql } from "gatsby";
 import React from "react";
 import { Card } from "antd";
-
+import AppLayout from "../components/Layout";
 
 function ProjectDetails({ data }) {
   const { html } = data.markdownRemark;
-  const { image, title } =
-    data.markdownRemark.frontmatter;
+  const { image, title } = data.markdownRemark.frontmatter;
   return (
+    <AppLayout>
       <Card>
         <h1>{title}</h1>
         <div>
@@ -15,6 +15,7 @@ function ProjectDetails({ data }) {
           <div dangerouslySetInnerHTML={{ __html: html }}></div>
         </div>
       </Card>
+    </AppLayout>
   );
 }
 

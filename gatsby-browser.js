@@ -1,8 +1,9 @@
-// gatsby-browser.js
+import ContextProvider from "./src/components/ContextProvider/ContextProvider";
 
-import React from "react";
-import Layout from "./src/components/Layout";
+//Gatsby's wrap root element used to provide a global context set in ContextProvider File
+export const wrapRootElement = ContextProvider;
 
-export const wrapRootElement = ({ element, props }) => {
-  return <Layout {...props}>{element}</Layout>;
-};
+//Wrap Page Element example, Gatsby has another global wrapper that wraps at the page level rather than root level
+/**
+ *export const wrapPageElement = ({ element }) =>{return (<></>)}}
+ **/
