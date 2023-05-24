@@ -1,3 +1,8 @@
+---
+slug: transform
+label: Transform
+---
+
 # TRANSFORM
 
 TRANSFORM function, defines specific operations that will be performed on every field in result dataset. TRANSFORM functions starts from row one and covers the entire dataset row by row.
@@ -5,6 +10,7 @@ When defining a transform you need to tell the function what it needs to be done
 Transform can be used with PROJECT, JOIN, ITERATE, ROLLUP and more.
 
 ## Syntax
+
 ```java
 EXPORT [return_dataset_layout] transform_name ([input_arguments_types]+ arg_name ) := TRANSFORM
       SELF.return_field_name := arg_name.input_dataset_fieldname;
@@ -13,19 +19,19 @@ EXPORT [return_dataset_layout] transform_name ([input_arguments_types]+ arg_name
 END;
 ```
 
-|Value|Definition|
-|:----|:---------|
-EXPORT | Optional, used in MODULEs.
-return_dataset_layout | Record-definition/layout of result dataset.
-transform_name | The name by which the transform will be invoked.
-input_arguments_types | The argument’s data type. If passing a dataset, the data type is DATASET(record_definition).
-arg_name |Used to reference your argument in the transform.
-TRANSFORM | Required.
-SELF | Reference the field in the return_data_type.
-return_field_name | Refers to the field in result dataset.
-input_Dataset_fieldname | Refers to the field in the input dataset.
-SELF := [ ] | Assign default value for every field in result dataset that doesn't have a defined operation or doesn't exists in the input dataset. For example if there is a INTEGER field in the result dataset, that transform didn't assign a definition to it, the field will receive a 0 which is the default value for INTEGER.
-END | Required.
+| Value                   | Definition                                                                                                                                                                                                                                                                                                              |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| EXPORT                  | Optional, used in MODULEs.                                                                                                                                                                                                                                                                                              |
+| return_dataset_layout   | Record-definition/layout of result dataset.                                                                                                                                                                                                                                                                             |
+| transform_name          | The name by which the transform will be invoked.                                                                                                                                                                                                                                                                        |
+| input_arguments_types   | The argument’s data type. If passing a dataset, the data type is DATASET(record_definition).                                                                                                                                                                                                                            |
+| arg_name                | Used to reference your argument in the transform.                                                                                                                                                                                                                                                                       |
+| TRANSFORM               | Required.                                                                                                                                                                                                                                                                                                               |
+| SELF                    | Reference the field in the return_data_type.                                                                                                                                                                                                                                                                            |
+| return_field_name       | Refers to the field in result dataset.                                                                                                                                                                                                                                                                                  |
+| input_Dataset_fieldname | Refers to the field in the input dataset.                                                                                                                                                                                                                                                                               |
+| SELF := [ ]             | Assign default value for every field in result dataset that doesn't have a defined operation or doesn't exists in the input dataset. For example if there is a INTEGER field in the result dataset, that transform didn't assign a definition to it, the field will receive a 0 which is the default value for INTEGER. |
+| END                     | Required.                                                                                                                                                                                                                                                                                                               |
 
 <br>
 
@@ -35,29 +41,27 @@ If you need the transform to be used in multiple places, or it contains many fie
 
 **Demo Dataset**
 
-|FirstName|LastName|
-|:----|:---|
-Sun | Shine
-Blue | Moon
-Silver | Rose
-
+| FirstName | LastName |
+| :-------- | :------- |
+| Sun       | Shine    |
+| Blue      | Moon     |
+| Silver    | Rose     |
 
 #### Example
 
 <br>
 <pre id="TransformExp_1">
 
-
 ```java
 /*
-TRANSFORM Example: 
-Using an input dataset, to concat names and count the number of rows in the input dataset. 
-PROJECT result always have the same number of rows as input dataset. 
+TRANSFORM Example:
+Using an input dataset, to concat names and count the number of rows in the input dataset.
+PROJECT result always have the same number of rows as input dataset.
 */
 
 
 // Defining record layout
-Names_layout := RECORD 
+Names_layout := RECORD
     STRING FirstName;
     STRING LastName;
 END;
@@ -86,10 +90,10 @@ INTEGER C: Counter
 NameOutRec CatThem(Names_layout L, INTEGER C) := TRANSFORM
 
   // Contacting FirstName with LastName and adding space between them
-  SELF.CatValues := L.FirstName + ' ' + L.LastName; 
+  SELF.CatValues := L.FirstName + ' ' + L.LastName;
   SELF.RecCount := C; // Counter
   // Assign default values to all fields that are in result dataset and haven't been define in this TRANSFORM
-  SELF := L; 
+  SELF := L;
 
 END;
 
@@ -106,10 +110,11 @@ Result := PROJECT(Names_DS,
 
 OUTPUT(Result, NAMED('Result'));
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['TransformExp_1'])"> Try Me </a>
 
-<br> 
+<br>
 
 ## TRANSFORM Type Two (Explicit TRANSFORM)
 
@@ -127,41 +132,39 @@ EXPORT project_name := PROJECT(input_dataset,
 
 ```
 
-|Value|Definition|
-|:----|:---------|
-EXPORT | Optional, used for constants, or in modules.
-project_name | The name by which the project will be invoked.
-PROJECT | Required. JOIN, ROLLUP and other functions can be used here.
-input_dataset | Input dataset itself and not the record definition.
-TRANSFORM | Required.
-return_dataset_layout | Record-definition/layout of result dataset.
-SELF | Reference the field in the return_data_type.
-return_field_name | Refers to the field in result dataset.
-input_Dataset_fieldname | Refers to the field in the input dataset.
-SELF := LEFT | Get the original values from input (left) dataset for all fields that don't have an operation defined.
-SELF := RIGHT | Used where there are two input dataset like JOIN. Get the original values from input (right) dataset for all fields that don't have an operation defined.
-SELF := [ ] | Assign default value for every field in result dataset that doesn't have a defined operation or doesn't exists in the input dataset. For example if there is a INTEGER field in the result dataset, that transform didn't assign a definition to it, the field will receive a 0 which is the default value for INTEGER.
-
+| Value                   | Definition                                                                                                                                                                                                                                                                                                              |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| EXPORT                  | Optional, used for constants, or in modules.                                                                                                                                                                                                                                                                            |
+| project_name            | The name by which the project will be invoked.                                                                                                                                                                                                                                                                          |
+| PROJECT                 | Required. JOIN, ROLLUP and other functions can be used here.                                                                                                                                                                                                                                                            |
+| input_dataset           | Input dataset itself and not the record definition.                                                                                                                                                                                                                                                                     |
+| TRANSFORM               | Required.                                                                                                                                                                                                                                                                                                               |
+| return_dataset_layout   | Record-definition/layout of result dataset.                                                                                                                                                                                                                                                                             |
+| SELF                    | Reference the field in the return_data_type.                                                                                                                                                                                                                                                                            |
+| return_field_name       | Refers to the field in result dataset.                                                                                                                                                                                                                                                                                  |
+| input_Dataset_fieldname | Refers to the field in the input dataset.                                                                                                                                                                                                                                                                               |
+| SELF := LEFT            | Get the original values from input (left) dataset for all fields that don't have an operation defined.                                                                                                                                                                                                                  |
+| SELF := RIGHT           | Used where there are two input dataset like JOIN. Get the original values from input (right) dataset for all fields that don't have an operation defined.                                                                                                                                                               |
+| SELF := [ ]             | Assign default value for every field in result dataset that doesn't have a defined operation or doesn't exists in the input dataset. For example if there is a INTEGER field in the result dataset, that transform didn't assign a definition to it, the field will receive a 0 which is the default value for INTEGER. |
 
 #### Example
 
 <br>
 <pre id="TransformExp_2">
 
-
 ```java
 
 /*
-TRANSFORM Example: 
-Using an input dataset, to concat names and count the number of rows in the input dataset. 
-PROJECT result always have the same number of rows as input dataset. 
+TRANSFORM Example:
+Using an input dataset, to concat names and count the number of rows in the input dataset.
+PROJECT result always have the same number of rows as input dataset.
 
-This TRANSFORM, PROJECT example provides the exact same result as above example. 
+This TRANSFORM, PROJECT example provides the exact same result as above example.
 The only difference is the way TRANSFORM is written and called.
 */
 
 // Defining record layout
-Names_layout := RECORD 
+Names_layout := RECORD
     STRING FirstName;
     STRING LastName;
 END;
@@ -184,7 +187,7 @@ END;
 ProjResult := PROJECT(Names_DS,
                     TRANSFORM(NameOutRec,
                       // Concat FirstName and LastName
-                      SELF.CatValues := LEFT.FirstName + ' ' + LEFT.LastName; 
+                      SELF.CatValues := LEFT.FirstName + ' ' + LEFT.LastName;
                       SELF.RecCount := COUNTER; // Counter
                       SELF := LEFT // Assign everything from left recordset
                     ));
@@ -192,7 +195,8 @@ ProjResult := PROJECT(Names_DS,
 OUTPUT(ProjResult, NAMED('ProjResult'));
 
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['TransformExp_2'])"> Try Me </a>
 
-<br> 
+<br>

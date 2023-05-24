@@ -1,22 +1,28 @@
+---
+slug: module
+label: Module
+---
+
 # MODULE
 
 MODULE is s a container that allows you to group related definitions and functionalities. The parameters passed to the module are shared by all the related members definitions.
 
 </br>
 
-**Notes** 
-- `OUTPUT` <u>can not</u>  be used within a module
+**Notes**
+
+- `OUTPUT` <u>can not</u> be used within a module
 - For modules to be called/used from outside, `EXPORT` is required
 - Module name should match the file name. if not "Error: Definition must contain EXPORT or SHARED " is generated
 - To call a module: `ModuleName.attributeName;`
 
 ### Variable Scope
 
-**LOCAL**   Definitions are visible only up to an EXPORT or SHARED.
+**LOCAL** Definitions are visible only up to an EXPORT or SHARED.
 
-**SHARED**  Definitions are visible through module.
+**SHARED** Definitions are visible through module.
 
-**EXPORT**  Definitions are visible within and outside of a module.
+**EXPORT** Definitions are visible within and outside of a module.
 
 Modules can contain multiple, SHARED and EXPORT values.
 
@@ -32,15 +38,15 @@ EXPORT module_name [ ( parameters ) ] := MODULE
 END
 ```
 
-|*Value*|*Definition*|
-|:----|:---------|
-EXPORT| Optional, indicates that this module is available outside of this file
-module_name |The name of the function
-param_data_type |Data type of each parameter (string, integer, Boolean, …)
-MODULE | required
-SHARED |The attribute or function can be accessed within the module
-EXPORT |The attribute or function can be accessed from outside of the module
-END |Indicates the end of module
+| _Value_         | _Definition_                                                           |
+| :-------------- | :--------------------------------------------------------------------- |
+| EXPORT          | Optional, indicates that this module is available outside of this file |
+| module_name     | The name of the function                                               |
+| param_data_type | Data type of each parameter (string, integer, Boolean, …)              |
+| MODULE          | required                                                               |
+| SHARED          | The attribute or function can be accessed within the module            |
+| EXPORT          | The attribute or function can be accessed from outside of the module   |
+| END             | Indicates the end of module                                            |
 
 #### Example
 
@@ -67,6 +73,7 @@ END;
 OUTPUT(myMod.PrintIt, NAMED('Mod_Call1'));
 OUTPUT(myMod.DoMath, NAMED('Mod_Call2'));
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['ModExp_1'])"> Try Me </a>
 
@@ -74,7 +81,6 @@ OUTPUT(myMod.DoMath, NAMED('Mod_Call2'));
 
 <br>
 <pre id = 'ModExp_2'>
-
 
 ```java
 /*
@@ -93,15 +99,15 @@ MyMod := MODULE
        RETURN Concat;
 
     END;
-    
+
     EXPORT SimpleMath(INTEGER Num) := FUNCTION
 
         Even := (STRING) Num + ' is an Even number';
         Odd  := (STRING) Num + ' is an Odd number';
 
         RETURN IF(Num % 2 = 0, Even, Odd);
-    END;          
-       
+    END;
+
 END;
 
 // Calling the module
@@ -115,4 +121,3 @@ OUTPUT(myMod.SimpleMath(Num), NAMED('SimpleMath'));
 <a class="trybutton" href="javascript:OpenECLEditor(['ModExp_2'])"> Try Me </a>
 
 </br>
-

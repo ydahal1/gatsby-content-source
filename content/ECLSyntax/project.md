@@ -1,7 +1,11 @@
+---
+slug: project
+label: Project
+---
+
 # PROJECT
 
-The PROJECT function processes through all records in the record-set performing the [TRANSFORM](./transform.md) function on each record in turn. PROJECT result __always__ have the same number of rows as input dataset. 
-
+The PROJECT function processes through all records in the record-set performing the [TRANSFORM](./transform.md) function on each record in turn. PROJECT result **always** have the same number of rows as input dataset.
 
 PROJECT is like SQL's SELECT … INTO TABLE …
 
@@ -24,11 +28,12 @@ EXPORT project_name := PROJECT(input_dataset,
                                );
 
 ```
-|Value|Definition|
-|:----|:---------|
-EXPORT | Optional, used within MODULEs
-project_name | The name by which the project will be invoked.
-PROJECT | Required.
+
+| Value        | Definition                                     |
+| :----------- | :--------------------------------------------- |
+| EXPORT       | Optional, used within MODULEs                  |
+| project_name | The name by which the project will be invoked. |
+| PROJECT      | Required.                                      |
 
 Please refer to [TRANSFORM](./transform.md) for TRANSFORM syntax.
 
@@ -36,23 +41,21 @@ Please refer to [TRANSFORM](./transform.md) for TRANSFORM syntax.
 
 **Demo Dataset**
 
-|StudentID|Name|ZipCode|Age|Major|isGraduated
-|:----|:---|:---|:---|:---|:---
-100 | Zorro |  30330 | 26 | History | TRUE 
-409 | Dan | 40001 | 26 | Nursing | FALSE
-300 | Sarah | 30000 | 25 | Art | FALSE 
-800 | Sandy | 30339 | 20 | Math | TRUE
-202 | Alan | 40001 | 33 | Math | TRUE 
-604 | Danny | 40001 | 18 | N/A | FALSE
-305 | Liz |  30330 | 22 | Chem |  TRUE 
-400 | Matt | 30005 | 22 | Nursing | TRUE
-
+| StudentID | Name  | ZipCode | Age | Major   | isGraduated |
+| :-------- | :---- | :------ | :-- | :------ | :---------- |
+| 100       | Zorro | 30330   | 26  | History | TRUE        |
+| 409       | Dan   | 40001   | 26  | Nursing | FALSE       |
+| 300       | Sarah | 30000   | 25  | Art     | FALSE       |
+| 800       | Sandy | 30339   | 20  | Math    | TRUE        |
+| 202       | Alan  | 40001   | 33  | Math    | TRUE        |
+| 604       | Danny | 40001   | 18  | N/A     | FALSE       |
+| 305       | Liz   | 30330   | 22  | Chem    | TRUE        |
+| 400       | Matt  | 30005   | 22  | Nursing | TRUE        |
 
 #### Example
 
 <br>
 <pre id="ProjectExp_1">
-
 
 ```java
 
@@ -87,9 +90,9 @@ ProjResult := PROJECT(StudentDS,
                     SELF.InState := IF(LEFT.ZipCode IN ['30330', '30005', '30000'], TRUE, FALSE);
                     SELF := LEFT; // Assigns StudentID, since it exists in input dataset.
 
-                    // Assigns default values to Tuition since it doesn't exists in input dataset, 
+                    // Assigns default values to Tuition since it doesn't exists in input dataset,
                     // nor it is defined in this TRANSFORM
-                    SELF := []    // Assigns default values to Tuition since it doesn't exists in input dataset 
+                    SELF := []    // Assigns default values to Tuition since it doesn't exists in input dataset
                     ));
 
 OUTPUT(ProjResult, NAMED('ProjResult'));
@@ -98,4 +101,4 @@ OUTPUT(ProjResult, NAMED('ProjResult'));
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['ProjectExp_1'])"> Try Me </a>
 
-<br> 
+<br>

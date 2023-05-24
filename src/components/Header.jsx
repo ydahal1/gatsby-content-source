@@ -11,12 +11,11 @@ const { Search } = Input;
 
 const menuItems = [
   { label: "Products", key: "/projects" },
-  { label: "Learn ECL", key: "/learnECL" },
+  { label: "Learn ECL", key: "/learnECL/start" },
   { label: "About US", key: "/aboutUs" },
 ];
 
 function SiteHeader({ appTheme, setAppTheme }) {
-  // const [theme, setTheme] = useContext(globalContext);
   const handleNavigation = (e) => {
     navigate(e.key);
   };
@@ -58,22 +57,14 @@ function SiteHeader({ appTheme, setAppTheme }) {
         items={menuItems}
         onClick={handleNavigation}
       ></Menu>
-      <div
-        style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}
-        className="header__items_right"
-      >
+      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center" }} className="header__items_right">
         <Search
           placeholder="search .."
           style={{
             width: 200,
           }}
         />
-        <Switch
-          checkedChildren={<BsBrightnessHigh />}
-          defaultChecked={false}
-          unCheckedChildren={<BsMoonStars />}
-          onChange={changeTheme}
-        />
+        <Switch checkedChildren={<BsBrightnessHigh />} defaultChecked={false} unCheckedChildren={<BsMoonStars />} onChange={changeTheme} />
       </div>
     </Header>
   );
@@ -81,6 +72,7 @@ function SiteHeader({ appTheme, setAppTheme }) {
 
 export default SiteHeader;
 
+//TODO
 // Set to local storage the status
 // Add logo swither
 // Change nav bar color o mode switch

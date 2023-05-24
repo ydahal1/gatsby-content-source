@@ -1,26 +1,31 @@
+---
+slug: denormalize
+label: Denormalize
+---
+
 # Denormalize
 
-This function is used to combine parent and child recordsets. In another word DENORMALIZE means adding precomputed data to a rational database which will result in improved readability and maintainability. 
-
+This function is used to combine parent and child recordsets. In another word DENORMALIZE means adding precomputed data to a rational database which will result in improved readability and maintainability.
 
 There are two ways to perform DENORMALIZE:
 
 ## Form One
-In this form TRANSFORM function takes at least two parameters: 
+
+In this form TRANSFORM function takes at least two parameters:
+
 - A LEFT record of the same format as the combined ParentDataset and ChildDataset (the resulting de-normalized record structure)
-- A RIGHT record of the same format as the ChildDataset. 
+- A RIGHT record of the same format as the ChildDataset.
 - Optional: An integer COUNTER specifying the number of times the transform has been called for the current set of parent/child pairs (Keep track of number of children added to each parent).
-- The __result__ of the TRANSFORM the same format as the __LEFT__ record which is parent and child combined record.
+- The **result** of the TRANSFORM the same format as the **LEFT** record which is parent and child combined record.
 - TRANSFORM is called per number of children. The input to the first TRANSFORM is the parent and one child. The input to the 2nd call is the output of 1st TRANSFORM and another child. The input to the 3rd call is the output of 2nd call and another child ……
 
 ### Parameters
+
 - `ParentDataset` The set of parent records to process, already in the format that will contain the denormalized parent and child records.
 - `ChildDataset` The set of child records to process.
-- `Condition`  An expression that specifies how to match records between the ParentDataset and ChildDataset.
+- `Condition` An expression that specifies how to match records between the ParentDataset and ChildDataset.
 - `TRANSFORM` The TRANSFORM function perform denormalize.
 - `Flags` Optional
-
-
 
 </br>
 
@@ -54,7 +59,7 @@ Adam|0
 
 </br>
 
- #### Example
+#### Example
 
 <br>
 <pre className="ecl_example">
@@ -73,7 +78,7 @@ child_layout := RECORD
 END;
 
 Parent_layout := RECORD
-    STRING  lastName; 
+    STRING  lastName;
     INTEGER CountIt         := 0;
     STRING  phoneNumOne     := '';
     STRING  phoneNumTwo     := '';
@@ -104,7 +109,7 @@ ParentDS := DATASET([{'Carpenter'},{'Smith'},
                      {'Jackson'},  {'Black'},
                      {'Raymond'},  {'Adam'}],
                             Parent_layout);
-											
+
 
 Parent_layout xForm(Parent_layout Le, childDS Ri, INTEGER C) := TRANSFORM
 
@@ -114,17 +119,18 @@ Parent_layout xForm(Parent_layout Le, childDS Ri, INTEGER C) := TRANSFORM
     SELF.addressTwo   := IF  (C = 1, Ri.address, Le.addressTwo);
     SELF.addressThree := IF  (C = 1, Ri.address, Le.addressThree);
     SELF.CountIt      := C;
-  
-  
+
+
     SELF := Le;
     self := [];
 
 END;
 ```
+
 </pre>
 <pre id='ecl_code'>
 
-``` java
+```java
 DeNorm := DENORMALIZE(ParentDS, childDS,
                         LEFT.lastName = RIGHT.lastName,
                         xForm(LEFT,RIGHT,COUNTER));
@@ -138,6 +144,7 @@ OUTPUT(ParentDS, NAMED('ParentDS'));
 // Viewing denormalize result
 OUTPUT(DeNorm, NAMED('DeNorm'));
 ```
+
 </pre>
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['ecl_code'], ['ecl_data'])"> Try Me </a>
@@ -145,7 +152,7 @@ OUTPUT(DeNorm, NAMED('DeNorm'));
 </br>
 </br>
 
-### Form One Syntax 
+### Form One Syntax
 
 ```java
 
@@ -167,14 +174,14 @@ END;
 
 Parent_Layout xForm(Parent_layout Le, Child_Layout Ri, INTEGER OptCont) := TRANSFORM
 
-    SELF.ChildField1 := IF(OptCont = 1, Ri.ChildField, Le.ChildField1); 
-    SELF.ChildField2 := IF(OptCont = 2, Ri.ChildField, Le.ChildField2); 
+    SELF.ChildField1 := IF(OptCont = 1, Ri.ChildField, Le.ChildField1);
+    SELF.ChildField2 := IF(OptCont = 2, Ri.ChildField, Le.ChildField2);
 
-    SELF.ChildField3 := IF(OptCont = 1, Ri.ChildField, Le.ChildField3); 
-    SELF.ChildField4 := IF(OptCont = 2, Ri.ChildField, Le.ChildField4); 
-    SELF.ChildField5 := IF(OptCont = 3, Ri.ChildField, Le.ChildField5); 
+    SELF.ChildField3 := IF(OptCont = 1, Ri.ChildField, Le.ChildField3);
+    SELF.ChildField4 := IF(OptCont = 2, Ri.ChildField, Le.ChildField4);
+    SELF.ChildField5 := IF(OptCont = 3, Ri.ChildField, Le.ChildField5);
 
-    //Optional 
+    //Optional
     SELF.TheCounter := OptCont;
 
     SELF := Le;
@@ -187,31 +194,32 @@ DeNorm := DENORMALIZE(ParentDS, ChildrenDS,
                         [,flags]);
 
 ```
+
 </br>
 
-|Value|Definition|
-|:----|:---------|
-Parent_Layout | Parent and child layouts combined
-xForm | TRANSFORM to perform denormalization
-ChildField1 | If counter is equal 1 it gets the first matching record value
-ChildField2 | If counter is equal 1 it gets the second matching record value
-MatchingField | Field(s) that exists both in  parent and child
+| Value         | Definition                                                     |
+| :------------ | :------------------------------------------------------------- |
+| Parent_Layout | Parent and child layouts combined                              |
+| xForm         | TRANSFORM to perform denormalization                           |
+| ChildField1   | If counter is equal 1 it gets the first matching record value  |
+| ChildField2   | If counter is equal 1 it gets the second matching record value |
+| MatchingField | Field(s) that exists both in parent and child                  |
 
 </br>
 </br>
 
 ## Form Two
 
-In this format TRANSFORM function takes at least two parameters. The difference from form one is instead of listing the fields in parents records, we can nest the children's dataset(s) 
+In this format TRANSFORM function takes at least two parameters. The difference from form one is instead of listing the fields in parents records, we can nest the children's dataset(s)
 
 - A LEFT record of the same format as the combined ParentDataset and ChildDataset (the resulting de-normalized record structure)
-- ROWS(RIGHT) dataset of the same format as the child layout. 
+- ROWS(RIGHT) dataset of the same format as the child layout.
 - The result of the TRANSFORM must be the same format as the LEFT record.
 - PROJECT can be used to make room for nested child dataset
 
 </br>
 
-#### Example 
+#### Example
 
 <br>
 <pre id = 'Denorm2_Exp1'>
@@ -305,11 +313,11 @@ OUTPUT(denorm, NAMED('denorm'));
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['Denorm2_Exp1'])"> Try Me </a>
 
-
 </br>
 </br>
 
-### Form Two Syntax 
+### Form Two Syntax
+
 ```java
 ChildLayout := RECORD
     Field1;
@@ -335,7 +343,7 @@ END;
 
 DeNorm := DENORMALIZE(ParentLayout, ChidLayout,
                         LEFT.Field = RIGHT.Field,
-                        
+
                         //Grouping the child layout records based on the matching condition
                         GROUP,
                         xFORM(LEFT,
@@ -345,7 +353,7 @@ DeNorm := DENORMALIZE(ParentLayout, ChidLayout,
 
 ```
 
-#### Example 
+#### Example
 
 <br>
 <pre id = 'Denorm2_Exp2'>
@@ -425,11 +433,11 @@ OUTPUT(denorm2, NAMED('denorm2'))
 
 ## Flags
 
-|Options|Description|
-|---|---|
-UNORDERED|Specifies the output record order is not significant
-ORDERED|Specifies the significance of the output record order
-STABLE|Specifies the input record order is significant
-PARALLEL|Try to evaluate this activity in parallel
-LOCAL|Specifies the operation is performed on each node independently, without requiring interaction with all other nodes to acquire data
-GROUP|Specifies the recordset is GROUPed and the ROLLUP operation will produce a single output record for each group
+| Options   | Description                                                                                                                         |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| UNORDERED | Specifies the output record order is not significant                                                                                |
+| ORDERED   | Specifies the significance of the output record order                                                                               |
+| STABLE    | Specifies the input record order is significant                                                                                     |
+| PARALLEL  | Try to evaluate this activity in parallel                                                                                           |
+| LOCAL     | Specifies the operation is performed on each node independently, without requiring interaction with all other nodes to acquire data |
+| GROUP     | Specifies the recordset is GROUPed and the ROLLUP operation will produce a single output record for each group                      |

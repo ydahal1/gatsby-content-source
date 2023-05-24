@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { theme, Layout, ConfigProvider } from "antd";
 import SiteHeader from "./Header";
 import SiteFooter from "./Footer";
-import "./layout.css";
 import { globalContext } from "./ContextProvider/ContextProvider";
+import "./layout.css";
+
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Content } = Layout;
 
@@ -12,8 +13,7 @@ function AppLayout({ children }) {
   return (
     <ConfigProvider
       theme={{
-        algorithm:
-          appTheme === "dark" ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        algorithm: appTheme === "dark" ? darkAlgorithm : defaultAlgorithm,
       }}
     >
       <Layout>

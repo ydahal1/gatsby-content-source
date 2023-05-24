@@ -1,37 +1,42 @@
-# EXISTS 
+---
+slug: exists
+label: Exists
+---
+
+# EXISTS
 
 EXISTS functions checks to see if there are any rows int the dataset. EXISTS returns TRUE if there is at least 1 record in the dataset.
 
-EXISTS is more efficient than COUNT, since COUNT will count all the rows in dataset, versus EXITS just checks to see row 1 exists. 
+EXISTS is more efficient than COUNT, since COUNT will count all the rows in dataset, versus EXITS just checks to see row 1 exists.
 
-## Syntax 
+## Syntax
 
- ```java
+```java
 EXISTS(recordset])
 EXISTS(value_set)
 ```
 
-|Value|Definition|
-|:----|:---------|
-EXISTS | Required.
-recordset | Dataset to be checked.
-value_set | Values in a SET to be check.
+| Value     | Definition                   |
+| :-------- | :--------------------------- |
+| EXISTS    | Required.                    |
+| recordset | Dataset to be checked.       |
+| value_set | Values in a SET to be check. |
 
 <br>
 
 **Demo Dataset**
 
-|City|State|County|Population|
-|:----|:---|:---|:----|
-Dauphin Island |AL|Mobile|1335
-Guy|AR|Faulkner|778
-El Centro|CA|Imperial|111425
-Indio|CA|Riverside|417059
-Englewood|CO|Arapahoe|6183
-Keywest|FL|Monroe|31401
-Manatee Road|FL|Levy|2670
-Villa Rica|GA|Carroll|16058
-Atlanta|GA|Fulton|5449398
+| City           | State | County    | Population |
+| :------------- | :---- | :-------- | :--------- |
+| Dauphin Island | AL    | Mobile    | 1335       |
+| Guy            | AR    | Faulkner  | 778        |
+| El Centro      | CA    | Imperial  | 111425     |
+| Indio          | CA    | Riverside | 417059     |
+| Englewood      | CO    | Arapahoe  | 6183       |
+| Keywest        | FL    | Monroe    | 31401      |
+| Manatee Road   | FL    | Levy      | 2670       |
+| Villa Rica     | GA    | Carroll   | 16058      |
+| Atlanta        | GA    | Fulton    | 5449398    |
 
 #### Example
 
@@ -52,7 +57,7 @@ Pop_DS := DATASET([
                 {'El Centro','CA','Imperial',111425},
                 {'Indio','CA','Riverside',417059},
                 {'Englewood','CO','Arapahoe',6183},
-                {'Keywest','FL','Monroe',31401}], 
+                {'Keywest','FL','Monroe',31401}],
                 Pop_Layout);
 
 // Converting a field to SET
@@ -65,9 +70,9 @@ Emp_DS := DATASET([], Pop_Layout);
 // Check to see if dataset has values
 OUTPUT(Emp_DS, NAMED('Emp_DS'));
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['ExistsExp_1'])"> Try Me </a>
-
 
 #### Example
 
@@ -80,14 +85,14 @@ EXISTS Example:
 Showing different examples of EXIST function values.
 */
 
-CheckMe := EXISTS(4,8,16,2,1); 
+CheckMe := EXISTS(4,8,16,2,1);
 OUTPUT(CheckMe, NAMED('CheckMe'));
 
 NullSet := [];
-CheckIt := EXISTS(NullSet); 
+CheckIt := EXISTS(NullSet);
 OUTPUT(CheckIt, NAMED('CheckIt'));
 
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['ExistsExp_2'])"> Try Me </a>
-

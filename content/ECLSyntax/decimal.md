@@ -1,18 +1,26 @@
+---
+slug: decimal
+label: Decimal
+---
+
 # DECIMAL
+
 A packed decimal value of n total digits. If you have a fixed precision, use decimal instead of REAL.
 
-
 ## Syntax
+
 ```java
 [UNSIGNED] DECIMALn [_y]  attribName
 ```
-|*Value*|*Definition*|
-|:------|:---------|
-[UNSIGNED]| Optional, if omitted the rightmost nibble holds the sign. 
-DECIMAL | Required.
-n| Total digits.
-[_y]| Optional, if present, the `y` defines the number of decimal places in the value. 
-attribName| The name by which the variable will be invoked.
+
+| _Value_    | _Definition_                                                                     |
+| :--------- | :------------------------------------------------------------------------------- |
+| [UNSIGNED] | Optional, if omitted the rightmost nibble holds the sign.                        |
+| DECIMAL    | Required.                                                                        |
+| n          | Total digits.                                                                    |
+| [_y]       | Optional, if present, the `y` defines the number of decimal places in the value. |
+| attribName | The name by which the variable will be invoked.                                  |
+
 <br>
 
 Keep in mind that y should always be less than or equal to n, and max is 32 leading total.

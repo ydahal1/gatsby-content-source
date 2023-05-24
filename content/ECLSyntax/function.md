@@ -1,3 +1,8 @@
+---
+slug: function
+label: Function
+---
+
 # Function
 
 A Function is a set of statements that take inputs, does some specific computation and produces an output or return a result. Result could be a value or a dataset.
@@ -21,16 +26,17 @@ EXPORT [return_data_type] function_name (data_type arg [, data_type arg]+) := FU
 
 END;
 ```
-|*Value*|*Definition*|
-|:----|:---------|
-EXPORT | Optional
-return_data_type|Optional (compiler can infer it from return_value). If returning a dataset, the data type is DATASET(record_definition)
-function_name| The name by which the function will be invoked
-data_type| The argument’s data type. If passing a dataset, the data type is DATASET(record_definition)
-ecl_code| Whatever code is needed to build return_value. Conversely, if the code does not contribute to return_value then it is ignored. Attributes defined here are scoped to the function
-RETURN|Required
-return_value|The result of the function
-END|Required
+
+| _Value_          | _Definition_                                                                                                                                                                      |
+| :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| EXPORT           | Optional                                                                                                                                                                          |
+| return_data_type | Optional (compiler can infer it from return_value). If returning a dataset, the data type is DATASET(record_definition)                                                           |
+| function_name    | The name by which the function will be invoked                                                                                                                                    |
+| data_type        | The argument’s data type. If passing a dataset, the data type is DATASET(record_definition)                                                                                       |
+| ecl_code         | Whatever code is needed to build return_value. Conversely, if the code does not contribute to return_value then it is ignored. Attributes defined here are scoped to the function |
+| RETURN           | Required                                                                                                                                                                          |
+| return_value     | The result of the function                                                                                                                                                        |
+| END              | Required                                                                                                                                                                          |
 
 #### Example
 
@@ -57,9 +63,9 @@ OUTPUT(MyFunc('Sunny'), NAMED('Sunny'));
 
 
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_1'])"> Try Me </a>
-
 
 ## Outputs in Function - Using WHEN
 
@@ -90,7 +96,7 @@ Pop_DS := DATASET([
                 {'El Centro','CA','Imperial',111425},
                 {'Indio','CA','Riverside',417059},
                 {'Englewood','CO','Arapahoe',6183},
-                {'Keywest','FL','Monroe',31401}], 
+                {'Keywest','FL','Monroe',31401}],
                 Pop_Layout);
 
 
@@ -116,9 +122,9 @@ END;
 
 SomeFunc(Pop_DS);
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_2'])"> Try Me </a>
-
 
 ## One Line Function
 
@@ -140,7 +146,6 @@ UNSIGNED2 Squared(UNSIGNED1 n) := n * n;
 
 isEven(INTEGER num) := num % 2 = 0;
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_3'])"> Try Me </a>
-
-

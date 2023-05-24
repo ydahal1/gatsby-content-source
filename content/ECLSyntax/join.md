@@ -1,18 +1,21 @@
+---
+slug: join
+label: Join
+---
+
 # JOIN
 
 JOIN is used to combine data or rows from two or more tables/datasets based on at least one boolean expression test.
 
-**Note:** When join condition is on STRING case sensitivity matters. For example Sun, SUN, and sun aren't the same. Make sure your STRING values are the same format to capture the matching dataset correctly. 
-
-
+**Note:** When join condition is on STRING case sensitivity matters. For example Sun, SUN, and sun aren't the same. Make sure your STRING values are the same format to capture the matching dataset correctly.
 
 ## Join Types
+
 </br>
 
 <p style='color:red'>Inner </p>  
 Returns all rows from both the dataset if the condition satisfies. 
 This join  will create the result-set by combining all rows from both the datasets where the condition satisfies. This is the default JOIN, so it doesn't need to be declared.
-
 
 <p style='color:red'>LEFT ONLY </p>
 Returns all the rows of the dataset on the left side of the join that didn’t match any rows from right dataset.
@@ -24,8 +27,7 @@ Returns all the rows of the dataset on the left side of the join and matching ro
 Returns all the rows of the dataset on the right side of the join that didn’t  match any rows from left dataset.
 
 <p style='color:red'>RIGHT OUTER </p>
-Returns all the rows of the dataset on the right side of the join and matching rows for the dataset on the left side of join. 
-
+Returns all the rows of the dataset on the right side of the join and matching rows for the dataset on the left side of join.
 
 <p style='color:red'>FULL ONLY </p>
 Returns all rows from both left and right datasets that don't have a match in opposite dataset.
@@ -41,6 +43,7 @@ For non matched rows, the fields from opposite dataset will remain null.
 ![Join Types Image](./images/JoinTypesDia.png)
 
 ## Syntax
+
 ```java
 /*** Join with Explicit Transform ***/
 attribName := JOIN(LEFT_DatasetName,
@@ -68,15 +71,15 @@ attribName := JOIN(LEFT_DatasetName,
                     [, flags]);
 ```
 
-|*Value*|*Definition*|
-|:----|:---------|
-attribName | The name by which the join will be invoked.
-LEFT_DatasetName | Left dataset of the join. LEFT is the first dataset passed to JOIN. 
-RIGHT_DatasetName | Right dataset of the join. RIGHT is the second dataset passed to JOIN. 
-LEFT.fieldName = RIGHT.fieldName | Join matching condition, it can use equal (=) or not-equal (!=). Join can take place on multiple conditions can exists using AND/OR
-Transform/xFormName | Explicit or stand-alone TRANSFORM. Keep in mind that you are passing two arguments to JOIN (left dataset and right dataset).
-JoinType | Default is Inner join.
-Flags | Optional
+| _Value_                          | _Definition_                                                                                                                        |
+| :------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| attribName                       | The name by which the join will be invoked.                                                                                         |
+| LEFT_DatasetName                 | Left dataset of the join. LEFT is the first dataset passed to JOIN.                                                                 |
+| RIGHT_DatasetName                | Right dataset of the join. RIGHT is the second dataset passed to JOIN.                                                              |
+| LEFT.fieldName = RIGHT.fieldName | Join matching condition, it can use equal (=) or not-equal (!=). Join can take place on multiple conditions can exists using AND/OR |
+| Transform/xFormName              | Explicit or stand-alone TRANSFORM. Keep in mind that you are passing two arguments to JOIN (left dataset and right dataset).        |
+| JoinType                         | Default is Inner join.                                                                                                              |
+| Flags                            | Optional                                                                                                                            |
 
 ### Optional Flags
 
@@ -112,28 +115,28 @@ LIMIT Specifies a maximum number of matching records which, if exceeded, either 
 
 Left dataset (StudentDS)
 
-|StudentID|Name|ZipCode|Age|Major|isGraduated
-|:----|:---|:---|:---|:---|:---
-100 | Zorro |  30330 | 26 | History | TRUE 
-409 | Dan | 40001 | 26 | Nursing | FALSE
-300 | Sarah | 30000 | 25 | Art | FALSE 
-800 | Sandy | 30339 | 20 | Math | TRUE
-202 | Alan | 40001 | 33 | Math | TRUE 
-604 | Danny | 40001 | 18 | N/A | FALSE
-305 | Liz |  30330 | 22 | Chem |  TRUE 
-400 | Matt | 30005 | 22 | Nursing | TRUE
+| StudentID | Name  | ZipCode | Age | Major   | isGraduated |
+| :-------- | :---- | :------ | :-- | :------ | :---------- |
+| 100       | Zorro | 30330   | 26  | History | TRUE        |
+| 409       | Dan   | 40001   | 26  | Nursing | FALSE       |
+| 300       | Sarah | 30000   | 25  | Art     | FALSE       |
+| 800       | Sandy | 30339   | 20  | Math    | TRUE        |
+| 202       | Alan  | 40001   | 33  | Math    | TRUE        |
+| 604       | Danny | 40001   | 18  | N/A     | FALSE       |
+| 305       | Liz   | 30330   | 22  | Chem    | TRUE        |
+| 400       | Matt  | 30005   | 22  | Nursing | TRUE        |
 
 Right Dataset(MajorDS)
 
-|MajorID|MajorName|NumOfYears|Department
-|:----|:---|:---|:---
-M101 | Dentist | 5 | medical
-M102 | Nursing | 4 | Medical
-M201 | Surgeon | 12 | Medical
-S101 | Math | 4 | Science
-S333 | Computer | 4 | Science
-A101 | Art | 3 | Art
-A102 | Digital Art |3| Art
+| MajorID | MajorName   | NumOfYears | Department |
+| :------ | :---------- | :--------- | :--------- |
+| M101    | Dentist     | 5          | medical    |
+| M102    | Nursing     | 4          | Medical    |
+| M201    | Surgeon     | 12         | Medical    |
+| S101    | Math        | 4          | Science    |
+| S333    | Computer    | 4          | Science    |
+| A101    | Art         | 3          | Art        |
+| A102    | Digital Art | 3          | Art        |
 
 #### Example
 
@@ -146,7 +149,7 @@ JOIN Example:
 JOIN examples showing case sensitivity and logical operations
 */
 
-//Importing standard library for string manipulation 
+//Importing standard library for string manipulation
 IMPORT STD;
 
 StudentRec := RECORD
@@ -184,7 +187,7 @@ getMajorRec := RECORD
   STRING Department;
 END;
 
-// Display all students that have a major defined in majorDS 
+// Display all students that have a major defined in majorDS
 // Using ToUpperCase to make sure all values have the same case sensitivity
 WithCase := JOIN(studentDS, majorDS,
                  STD.Str.ToUpperCase(LEFT.major) = STD.Str.ToUpperCase(RIGHT.MajorName),
@@ -195,7 +198,7 @@ WithCase := JOIN(studentDS, majorDS,
 
 OUTPUT(WithCase, NAMED('WithCase'));
 
-// Display all students that have a major defined in majorDS 
+// Display all students that have a major defined in majorDS
 // Using the string values as they are
 WithoutCase := JOIN(studentDS, majorDS,
                  LEFT.major = RIGHT.MajorName,
@@ -206,7 +209,7 @@ WithoutCase := JOIN(studentDS, majorDS,
 
 OUTPUT(WithoutCase, NAMED('WithoutCase'));
 
-// Display all students that have a major defined in majorDS 
+// Display all students that have a major defined in majorDS
 // And have more than 3 years in NumOfYears
 GetStudents := JOIN(studentDS, majorDS,
                  STD.Str.ToUpperCase(LEFT.major) = STD.Str.ToUpperCase(RIGHT.MajorName) AND
@@ -226,29 +229,28 @@ OUTPUT(GetStudents, NAMED('GetStudents'));
 </br>
 </br>
 
-
 **Demo Dataset**
 
 Left Dataset
 ColorID|Color|isDark
 |---|---|---
-1 | Blue | 1 
+1 | Blue | 1
 2 | Red | 0
-3 | Black | 1 
+3 | Black | 1
 4 | Green | 1
-5 | Olive | 0 
+5 | Olive | 0
 11 | Maroon | 1
 
 Right Dataset:
 
-ID|Hue|Code|
----|---|---
-2 | Red | #FF0000 
-3 | Black | #000000
-4 | Green | #008000 
-8 | Green | #FFC0CB
-10 | Red | #000000 
-12 | Lime |#00FF00
+| ID  | Hue   | Code    |
+| --- | ----- | ------- |
+| 2   | Red   | #FF0000 |
+| 3   | Black | #000000 |
+| 4   | Green | #008000 |
+| 8   | Green | #FFC0CB |
+| 10  | Red   | #000000 |
+| 12  | Lime  | #00FF00 |
 
 <br>
 <pre id = 'JoinExp_2'>
@@ -268,7 +270,7 @@ END;
 
 ColorsDS := DATASET([{1, 'Blue', 1}, {2, 'Red', 0},
                      {3, 'Black', 1}, {4, 'Green', 1},
-                     {5, 'Olive', 0}, {11, 'Maroon', 1}], 
+                     {5, 'Olive', 0}, {11, 'Maroon', 1}],
                      ColorRec);
 
 
@@ -294,18 +296,18 @@ END;
 
 
 //***************************************************************************
-// LEFT ONLY 
+// LEFT ONLY
 LeftOnly := JOIN(ColorsDS,   // LEFT dataset
                 ColorCodeDS, // RIGHT dataset
                  LEFT.ColorID = RIGHT.ID,   // Marching condition
-                 TRANSFORM(ColorResRec, 
+                 TRANSFORM(ColorResRec,
                     SELF.ColorCode := RIGHT.Code,
                     SELF.Category  := IF(LEFT.isDark, 'Dark', 'Bright'),
                     SELF := LEFT,
                     SELF := RIGHT
                     ),
                     LEFT ONLY);
-                     
+
 OUTPUT(LeftOnly, NAMED('LeftOnly'));
 
 //***************************************************************************
@@ -313,43 +315,43 @@ OUTPUT(LeftOnly, NAMED('LeftOnly'));
 LeftOuter := JOIN(ColorsDS,   // LEFT dataset
                 ColorCodeDS, // RIGHT dataset
                  LEFT.ColorID = RIGHT.ID,   // Marching condition
-                 TRANSFORM(ColorResRec, 
+                 TRANSFORM(ColorResRec,
                     SELF.ColorCode := RIGHT.Code,
                     SELF.Category  := IF(LEFT.isDark, 'Dark', 'Bright'),
                     SELF := LEFT,
                     SELF := RIGHT
                     ),
                     LEFT Outer);
-                     
+
 OUTPUT(LeftOuter, NAMED('LeftOuter'));
 
 //***************************************************************************
 // FULL ONLY
-FullOnly := JOIN(ColorsDS, 
+FullOnly := JOIN(ColorsDS,
                 ColorCodeDS,
                  LEFT.ColorID = RIGHT.ID,
-                 TRANSFORM(ColorResRec, 
+                 TRANSFORM(ColorResRec,
                     SELF.ColorCode := RIGHT.Code,
                     SELF.Category  := IF(LEFT.isDark, 'Dark', 'Bright'),
                     SELF := LEFT,
                     SELF := RIGHT
                     ),
                     FULL ONLY);
-                     
+
 OUTPUT(FullOnly, NAMED('FullOnly'));
 
 // Full OUTER
-FullOuter := JOIN(ColorsDS, 
+FullOuter := JOIN(ColorsDS,
                 ColorCodeDS,
                  LEFT.ColorID = RIGHT.ID,
-                 TRANSFORM(ColorResRec, 
+                 TRANSFORM(ColorResRec,
                     SELF.ColorCode := RIGHT.Code,
                     SELF.Category  := IF(LEFT.isDark, 'Dark', 'Bright'),
                     SELF := LEFT,
                     SELF := RIGHT
                     ),
                     FULL OUTER);
-                     
+
 OUTPUT(FullOuter, NAMED('FullOuter'));
 ```
 

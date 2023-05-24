@@ -1,20 +1,25 @@
+---
+slug: normalize
+label: Normalize
+---
+
 # NORMALIZE
 
-NORMALIZE gets a parent-child (DENORMALIZED)  dataset and extract the child dataset from it. The purpose is to take variable-length flat-file records and split out the child information. 
-
+NORMALIZE gets a parent-child (DENORMALIZED) dataset and extract the child dataset from it. The purpose is to take variable-length flat-file records and split out the child information.
 
 There are two ways to normalize a child dataset:
+
 - All Records: Processing all child records
 - With Counter: Using counter for a certain number of children
 
 ## Normalize All Records
 
-This form processes through __all__ records in the recordset executing transform function through all the child dataset records in each record. This method is used when we have embedded child dataset.
+This form processes through **all** records in the recordset executing transform function through all the child dataset records in each record. This method is used when we have embedded child dataset.
 
-You can think of this as a specialized [JOIN](./join.md) where the TRANSFORM is called with, 
+You can think of this as a specialized [JOIN](./join.md) where the TRANSFORM is called with,
 LEFT as the “main” record being processed and RIGHT as one of the records from the child dataset.
 
-In this form TRANSFORM is called for each parent record with child record pair. 
+In this form TRANSFORM is called for each parent record with child record pair.
 
 ### Parameters
 
@@ -22,11 +27,9 @@ In this form TRANSFORM is called for each parent record with child record pair.
 - The resulting record set format does not need to be the same as the input.
 - Child layout is being called as an embedded dataset.
 
-
 </br>
 
-
-#### Example 
+#### Example
 
 <br>
 <pre id = 'NormExp_1'>
@@ -40,10 +43,10 @@ NORMALIZE All Records
 // Child layout that's being extract  from parent
 Child_Layout := RECORD
     INTEGER1 NameID;
-    STRING20 Addr; 
+    STRING20 Addr;
 END;
 
-// Parent Layout with child dataset 
+// Parent Layout with child dataset
 Parent_Layout := RECORD
     INTEGER1 NameID;
     STRING20 Name;
@@ -51,7 +54,7 @@ Parent_Layout := RECORD
 END;
 
 // Parent dataset with child dataset
-parentDS := DATASET([ 
+parentDS := DATASET([
                        {1,'Kevin',   [ {1, '290 Downtown Abby'}] },
                        {2,'Liz',     [ {2, '2345 Lake View Rd'}, {2, '776  Action Cir'}] },
                        {3,'Jacob',   [ ]},
@@ -104,14 +107,14 @@ END;
 
 attribName := NORMALIZE(ParentsDS,
                          //Sending only the child dataset
-                         LEFT.Children, 
+                         LEFT.Children,
                          xForm(RIGHT)
                          [,flags]);
 ```
 
 ## Normalize With COUNTER
 
-This NORMALIZE form calls TRANSFORM <n> times for each parent record.  <n> does not need to be the same value for every record. The TRANSFORM function must take at least a **LEFT** record of the same format as the input recordset. The resulting record set format does not need to be the same as the input.
+This NORMALIZE form calls TRANSFORM <n> times for each parent record. <n> does not need to be the same value for every record. The TRANSFORM function must take at least a **LEFT** record of the same format as the input recordset. The resulting record set format does not need to be the same as the input.
 
 #### Example
 
@@ -126,8 +129,8 @@ NORMALIZE with COUNTER Example
 Parent_layout := RECORD
   // The explicitCount defines:
   // how many times transform should execute per record.
-  INTEGER explicitCount; 
-  STRING  lastName; 
+  INTEGER explicitCount;
+  STRING  lastName;
   STRING  phoneOne;
   STRING  phoneTwo;
   STRING  addressOne;
@@ -139,7 +142,7 @@ END;
 parentDS := DATASET([
                 {2, 'Alexa', '7701234567',  '', '123 Main Str', '404 capital cr', ''},
                 {2, 'Smith', '', '8890002323', '504 Sunset Blvd', '990 Rose highway', ''},
-                
+
                 //Notice Adam has two phone numbers, but assigning 1 for number of execution
                 {1, 'Adam', '6789991111', '4445679000', '', '', ''},
                 {2, 'Black', '5694023457' ,'', '777 Formal Str', '111 Batman Corner', ''},
@@ -152,28 +155,29 @@ OUTPUT(parentDS, NAMED('parentDS'));
 child_layout := RECORD
   INTEGER    countIt;
   STRING     Name;
-  STRING     phone; 
+  STRING     phone;
   STRING     address;
 END;
 
 
 child_layout xForm(Parent_layout Li, INTEGER counting) := TRANSFORM
 
-        SELF.countIt    := counting;      
+        SELF.countIt    := counting;
         SELF.name       := Li.lastName;
         SELF.phone      := CHOOSE(counting, Li.phoneOne, Li.phoneTwo);
         SELF.address    := CHOOSE(counting, Li.addressOne, Li.addressTwo, Li.addressThree);
 END;
-  
+
 extractChild := NORMALIZE(parentDS,
                           //Number of times transform should go through a record
-                          LEFT.explicitCount, 
+                          LEFT.explicitCount,
                           xForm(LEFT,COUNTER));
 
 OUTPUT(extractChild, NAMED('extractChild'));
 
 
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['Norm2Exp_1'])"> Try Me </a>
 
@@ -215,9 +219,9 @@ ExtractChildren := NORMALIZE(ParentDS,
 
 ## Flags
 
-|Options|Description|
-|---|---|
-UNORDERED|Specifies the output record order is not significant
-ORDERED|Specifies the significance of the output record order
-STABLE|Specifies the input record order is significant
-PARALLEL|Try to evaluate this activity in parallel
+| Options   | Description                                           |
+| --------- | ----------------------------------------------------- |
+| UNORDERED | Specifies the output record order is not significant  |
+| ORDERED   | Specifies the significance of the output record order |
+| STABLE    | Specifies the input record order is significant       |
+| PARALLEL  | Try to evaluate this activity in parallel             |

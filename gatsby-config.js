@@ -1,6 +1,9 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+
+const path = require("path");
+
 module.exports = {
   siteMetadata: {
     title: `projects-portfolio`,
@@ -13,7 +16,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `projects`,
-        path: `${__dirname}/content/projects/`,
+        path: path.join(`${__dirname}`, "content", "projects"),
         ignore: [`**/\.*`, `**/eclProjects/**/*`],
         // Use "mtime" and "inode" to fingerprint files (to check if file has changed)
         fastHash: true,
@@ -23,15 +26,18 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `learnECL`,
-        path: `${__dirname}/content/ECLSyntax/`,
+        path: path.join(`${__dirname}`, "content", "ECLSyntax"),
         ignore: [`**/\.*`, `**/projects/**/*`],
         // Use "mtime" and "inode" to fingerprint files (to check if file has changed)
         fastHash: true,
       },
     },
-
-    {
-      resolve: `gatsby-transformer-remark`,
-    },
+    `gatsby-transformer-remark`,
+    // {
+    //   resolve: "gatsby-transformer-remark",
+    //   options: {
+    //     plugins: ["remark-react"],
+    //   },
+    // },
   ],
 };

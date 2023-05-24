@@ -1,3 +1,8 @@
+---
+slug: boolean
+label: Boolean
+---
+
 # BOOLEAN
 
 A Boolean data type is a TRUE/FALSE expression.
@@ -7,11 +12,11 @@ A Boolean data type is a TRUE/FALSE expression.
 ```java
 BOOLEAN attribName
 ```
-|*Value*|*Definition*|
-|:------|:---------|
-BOOLEAN | Optional.
-attribName | The name by which the variable will be invoked.
 
+| _Value_    | _Definition_                                    |
+| :--------- | :---------------------------------------------- |
+| BOOLEAN    | Optional.                                       |
+| attribName | The name by which the variable will be invoked. |
 
 #### Example
 
@@ -33,6 +38,7 @@ OUTPUT(HasValidName, NAMED('HasValidName'));
 // Boolean evaluation
 OUTPUT(10 >= 2, NAMED('Evaluation'));
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['BoolExp_1'])"> Try Me </a>
 

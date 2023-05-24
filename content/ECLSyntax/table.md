@@ -1,3 +1,8 @@
+---
+slug: table
+label: Table
+---
+
 # TABLE
 
 TABLE is the most commonly-used data aggregation functions in ECL. It creates a new dataset in memory while workunit is running.
@@ -30,16 +35,17 @@ attr_name := TABLE(dataset,
                     );
 
 ```
-|*Value*|*Definition*|
-|:----|:---------|
-out_record_def | Record definition that will contain both the grouping condition results and any new attributes computed as part of the aggregation
-dataset.field | field(s) from input dataset
-field_name | Newly defined fields
-attr_name | The name by which the table will be invoked
-TABLE | Required 
-dataset | Input dataset to create the table from
-grouping_condition | One or more comma-delimited expressions. Please see Grouping Condition for more information
-flags | Optional flags that can alter the behavior of TABLE
+
+| _Value_            | _Definition_                                                                                                                       |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| out_record_def     | Record definition that will contain both the grouping condition results and any new attributes computed as part of the aggregation |
+| dataset.field      | field(s) from input dataset                                                                                                        |
+| field_name         | Newly defined fields                                                                                                               |
+| attr_name          | The name by which the table will be invoked                                                                                        |
+| TABLE              | Required                                                                                                                           |
+| dataset            | Input dataset to create the table from                                                                                             |
+| grouping_condition | One or more comma-delimited expressions. Please see Grouping Condition for more information                                        |
+| flags              | Optional flags that can alter the behavior of TABLE                                                                                |
 
 ```java
 /*** Implicit record definition ***/
@@ -59,15 +65,15 @@ attr_name := TABLE(dataset,
 
 
 ```
-|*Value*|*Definition*|
-|:----|:---------|
-attr_name | The name by which the table will be invoked
-TABLE | Required 
-field | field(s) from input dataset
-field_name | Newly defined fields
-grouping_condition | One or more comma-delimited expressions. Please see Group for more information
-flags | Optional flags that can alter the behavior of TABLE
 
+| _Value_            | _Definition_                                                                   |
+| :----------------- | :----------------------------------------------------------------------------- |
+| attr_name          | The name by which the table will be invoked                                    |
+| TABLE              | Required                                                                       |
+| field              | field(s) from input dataset                                                    |
+| field_name         | Newly defined fields                                                           |
+| grouping_condition | One or more comma-delimited expressions. Please see Group for more information |
+| flags              | Optional flags that can alter the behavior of TABLE                            |
 
 ### Grouping Condition
 
@@ -81,35 +87,35 @@ flags | Optional flags that can alter the behavior of TABLE
 </br>
 
 ### Optional Flags
+
 Flags can alter the behavior of TABLE. Commonly used flags are MERGE and LOCAL
 
-Flag | Definition
----|---
-FEW | Indicates that the expression will result in fewer than 10,000 distinct groups. This allows optimization to produce a significantly faster result.
-MANY | Indicates that the expression will result in many distinct groups.
-UNSORTED | Specifies that you don't care about the order of the groups. This allows optimization to produce a significantly faster result.
-LOCAL | Specifies the operation is performed on each node independently; the operation maintains the distribution of any previous _DISTRIBUT_.
-KEYED | Specifies the activity is part of an index read operation, which allows the optimizer to generate optimal code for the operation.
-MERGE| Specifies that results are aggregated on each node and then the aggregated intermediaries are aggregated globally. This is a safe method of aggregation that shines particularly well if the underlying data was skewed.
-SKEW | Indicates that you know the data will not be spread evenly across nodes.
+| Flag     | Definition                                                                                                                                                                                                               |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| FEW      | Indicates that the expression will result in fewer than 10,000 distinct groups. This allows optimization to produce a significantly faster result.                                                                       |
+| MANY     | Indicates that the expression will result in many distinct groups.                                                                                                                                                       |
+| UNSORTED | Specifies that you don't care about the order of the groups. This allows optimization to produce a significantly faster result.                                                                                          |
+| LOCAL    | Specifies the operation is performed on each node independently; the operation maintains the distribution of any previous _DISTRIBUT_.                                                                                   |
+| KEYED    | Specifies the activity is part of an index read operation, which allows the optimizer to generate optimal code for the operation.                                                                                        |
+| MERGE    | Specifies that results are aggregated on each node and then the aggregated intermediaries are aggregated globally. This is a safe method of aggregation that shines particularly well if the underlying data was skewed. |
+| SKEW     | Indicates that you know the data will not be spread evenly across nodes.                                                                                                                                                 |
 
 ## GROUP
 
 The GROUP keyword is used within output format parameter (RECORD Structure) of a TABLE definition. <u>_GROUP replaces the recordset parameter_</u> of any aggregate built-in function used in the output to indicate the operation is performed for each group of the expression. This is similar to an SQL "GROUP BY" clause.
 
-
 **Demo Dataset**
 
-Pickup_Date|Fare|Distance
----|---|---
-1/1/2021|25.1|15.5
-1/2/2021|40.15,7.2
-1/3/2021|25.36|6.5
-1/2/2021|120|23
-1/3/2021|30|60.75
-2/2/2021|25|71
-1/2/2021|10|2.2
-3/10/2021|45|12.23
+| Pickup_Date | Fare      | Distance |
+| ----------- | --------- | -------- |
+| 1/1/2021    | 25.1      | 15.5     |
+| 1/2/2021    | 40.15,7.2 |
+| 1/3/2021    | 25.36     | 6.5      |
+| 1/2/2021    | 120       | 23       |
+| 1/3/2021    | 30        | 60.75    |
+| 2/2/2021    | 25        | 71       |
+| 1/2/2021    | 10        | 2.2      |
+| 3/10/2021   | 45        | 12.23    |
 
 <br>
 <pre id = 'TableExp_1'>
@@ -150,6 +156,7 @@ crossTabDs := TABLE(FareDS,           // Input dataset. please see dataset above
 OUTPUT(crossTabDs, NAMED('crossTabDs'));
 
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['TableExp_1'])"> Try Me </a>
 
@@ -158,20 +165,19 @@ OUTPUT(crossTabDs, NAMED('crossTabDs'));
 
 **Demo Dataset**
 
-PersonID|FirstName|LastName|isEmployed|AvgIncome|EmpGroupNum
-|:----|:---|:---|:---|:---|:---
-1102|Fred|Smith|FALSE|1000|900
-3102|Fact|Smith|TRUE|200000|100
-1012|Joe|Blow|TRUE|11250|200
-2085|Blue|Moon|TRUE|185000|500
-3055|Silver|Jo|FALSE|5000|900
-1265|Darling|Jo|TRUE|5000|100
-1265|Darling|Alex|TRUE|5000|100
-5265|Blue|Silver|TRUE|75000|200
-7333|Jane|Smith|FALSE|50000|900
-6023|Alex|Silver|TRUE|102000|200
-1024|Nancy|Moon|TRUE|201100|700
-
+| PersonID | FirstName | LastName | isEmployed | AvgIncome | EmpGroupNum |
+| :------- | :-------- | :------- | :--------- | :-------- | :---------- |
+| 1102     | Fred      | Smith    | FALSE      | 1000      | 900         |
+| 3102     | Fact      | Smith    | TRUE       | 200000    | 100         |
+| 1012     | Joe       | Blow     | TRUE       | 11250     | 200         |
+| 2085     | Blue      | Moon     | TRUE       | 185000    | 500         |
+| 3055     | Silver    | Jo       | FALSE      | 5000      | 900         |
+| 1265     | Darling   | Jo       | TRUE       | 5000      | 100         |
+| 1265     | Darling   | Alex     | TRUE       | 5000      | 100         |
+| 5265     | Blue      | Silver   | TRUE       | 75000     | 200         |
+| 7333     | Jane      | Smith    | FALSE      | 50000     | 900         |
+| 6023     | Alex      | Silver   | TRUE       | 102000    | 200         |
+| 1024     | Nancy     | Moon     | TRUE       | 201100    | 700         |
 
 <br>
 <pre id = 'TableExp_2'>
@@ -187,12 +193,12 @@ AllPeople_Layout := RECORD
   STRING15  FirstName;
   STRING25  LastName;
   BOOLEAN   isEmployed;
-  UNSIGNED  AvgIncome; 
+  UNSIGNED  AvgIncome;
   INTEGER   EmpGroupNum;
 END;
 
 
-AllPeopleDS := DATASET([ 
+AllPeopleDS := DATASET([
                        {1102,'Fred','Smith', FALSE, 1000, 900},
                        {3102,'Fact','Smith', TRUE, 200000, 100},
                        {1012,'Joe','Blow', TRUE, 11250, 200},
@@ -224,16 +230,8 @@ AvgIncome := TABLE(AllPeopleDS,
 
 OUTPUT(AvgIncome, NAMED('AvgIncome'));
 ```
+
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['TableExp_2'])"> Try Me </a>
 
 </br>
-
-
-
-
-
-
-
-
-

@@ -1,10 +1,13 @@
+---
+slug: choose
+label: Choose
+---
+
 # CHOOSE
-CHOOSE function eEvaluates the expression and returns the value parameter whose ordinal position in the list of parameters corresponds to the result of the expression. All values for this function must have the <t style='color:green'>same type </t>. If no match is found it will return the else-value. 
 
+CHOOSE function eEvaluates the expression and returns the value parameter whose ordinal position in the list of parameters corresponds to the result of the expression. All values for this function must have the <t style='color:green'>same type </t>. If no match is found it will return the else-value.
 
-
-
-#### Example 
+#### Example
 
 <br>
 <pre id = 'ChooseExp_1'>
@@ -30,18 +33,18 @@ CHOOSE(Eval, 3, 4, 8);             // Returns 8 (the else value)
 </br>
 
 ## Syntax
+
 ```java
 CHOOSE(Expression, Value1,... , ValueN, Else);
 ```
 
-|*Value*|*Definition*|
-|:----|:---------|
-Expression| Evaluation field
-Value1 … ValueN|If expression matches it will return the result 
-Else|If nothing matches else-value is returned
+| _Value_         | _Definition_                                    |
+| :-------------- | :---------------------------------------------- |
+| Expression      | Evaluation field                                |
+| Value1 … ValueN | If expression matches it will return the result |
+| Else            | If nothing matches else-value is returned       |
 
-
-#### Example 
+#### Example
 
 <br>
 <pre id = 'ChooseExp_2'>

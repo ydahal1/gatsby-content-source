@@ -1,9 +1,13 @@
+---
+slug: topn
+label: Topn
+---
+
 # TOPN
 
-In a <t style='color:pink'>sorted dataset </t> TOPN returns the n number of records from the row 1 of the dataset. 
+In a <t style='color:pink'>sorted dataset </t> TOPN returns the n number of records from the row 1 of the dataset.
 
-
-#### Example 
+#### Example
 
 <br>
 <pre id = 'TopnExp_1'>
@@ -38,28 +42,28 @@ OUTPUT(TOPN(MyDS, 3, -Income), NAMED('Sorted_Income'));
 </br>
 </br>
 
-## Syntax 
+## Syntax
 
 ```java
 TOPN(Dataset, Count, SortValues[,flag(s)]);
 ```
 
-|*Value*|*Definition*|
-|:----|:---------|
-Dataset|Input dataset
-Count   |    Number of records to displat
-SortValues|   Fields that sorting will be executed on 
-flags      |  Optional
+| _Value_    | _Definition_                            |
+| :--------- | :-------------------------------------- |
+| Dataset    | Input dataset                           |
+| Count      | Number of records to displat            |
+| SortValues | Fields that sorting will be executed on |
+| flags      | Optional                                |
 
 </br>
 
 ## Flags
 
-|Options|Description|
-|---|---|
-UNORDERED|Specifies the output record order is not significant
-ORDERED|Specifies the significance of the output record order
-STABLE|Specifies the input record order is significant
-PARALLEL|Try to evaluate this activity in parallel
-LOCAL|Specifies the operation is performed on each node independently, without requiring interaction with all other nodes to acquire data
-GROUP|Specifies the recordset is GROUPed and the ROLLUP operation will produce a single output record for each group
+| Options   | Description                                                                                                                         |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| UNORDERED | Specifies the output record order is not significant                                                                                |
+| ORDERED   | Specifies the significance of the output record order                                                                               |
+| STABLE    | Specifies the input record order is significant                                                                                     |
+| PARALLEL  | Try to evaluate this activity in parallel                                                                                           |
+| LOCAL     | Specifies the operation is performed on each node independently, without requiring interaction with all other nodes to acquire data |
+| GROUP     | Specifies the recordset is GROUPed and the ROLLUP operation will produce a single output record for each group                      |

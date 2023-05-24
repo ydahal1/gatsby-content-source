@@ -1,5 +1,6 @@
 ---
 slug: between
+label: Between
 ---
 
 # BETWEEN

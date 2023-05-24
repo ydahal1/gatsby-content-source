@@ -1,8 +1,11 @@
+---
+slug: if
+label: If
+---
+
 # IF Statement
 
 The IF function allows you to make a logical comparison between value(s) and what returning a result if that condition is True or False.
-
-
 
 ## Syntax
 
@@ -10,14 +13,13 @@ The IF function allows you to make a logical comparison between value(s) and wha
 attr_name := IF(expression, true_result [, false_result])
 ```
 
-|*Value*|*Definition*|
-|:------|:---------|
-attribName | The name by which the variable will be invoked.
-IF| Required
-expression| Boolean expression to be check for True or False
-true_result| Result value or action if expression is True
-false_result|May be omitted only if true_result is an action
-
+| _Value_      | _Definition_                                     |
+| :----------- | :----------------------------------------------- |
+| attribName   | The name by which the variable will be invoked.  |
+| IF           | Required                                         |
+| expression   | Boolean expression to be check for True or False |
+| true_result  | Result value or action if expression is True     |
+| false_result | May be omitted only if true_result is an action  |
 
 <br>
 #### Example
@@ -50,23 +52,24 @@ Final;
 </pre>
 <a class="trybutton" href="javascript:OpenECLEditor(['IfExp_1'])"> Try Me </a>
 
-## Logical Operators 
+## Logical Operators
+
 Logical values that can be used for comparison of two values.
 
 </br>
 
-|Operator|Description|
-|:----|:---|
-=	  | Equal
-\>  | Greater than
-<	  | Less than
-\>= | Greater than or equal	
-<=  | Less than or equal	
-<>  | Not equal
-!=  | Not equal
-~   | Not
-AND | Logical AND
-OR  | Logical OR
-IN  | To specify multiple possible values for a field/column
-NOT IN  | To specify multiple possible values that are not in a field/column
-BETWEEN | Between a certain range
+| Operator | Description                                                        |
+| :------- | :----------------------------------------------------------------- |
+| =        | Equal                                                              |
+| \>       | Greater than                                                       |
+| <        | Less than                                                          |
+| \>=      | Greater than or equal                                              |
+| <=       | Less than or equal                                                 |
+| <>       | Not equal                                                          |
+| !=       | Not equal                                                          |
+| ~        | Not                                                                |
+| AND      | Logical AND                                                        |
+| OR       | Logical OR                                                         |
+| IN       | To specify multiple possible values for a field/column             |
+| NOT IN   | To specify multiple possible values that are not in a field/column |
+| BETWEEN  | Between a certain range                                            |

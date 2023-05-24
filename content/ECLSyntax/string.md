@@ -1,17 +1,23 @@
-# STRING
-STRING data type is a sequence of characters, digits, and special characters including space. STRINGs are wrapped in  single quotation (' ').
+---
+slug: string
+label: String
+---
 
-## Syntax 
+# STRING
+
+STRING data type is a sequence of characters, digits, and special characters including space. STRINGs are wrapped in single quotation (' ').
+
+## Syntax
 
 ```java
 STRING[n] attribName
 ```
 
-|*Value*|*Definition*|
-|:------|:---------|
-STRING | Optional.
-[n] | Optional, if omitted, the string will store entire value.
-attribName | The name by which the variable will be invoked.
+| _Value_    | _Definition_                                              |
+| :--------- | :-------------------------------------------------------- |
+| STRING     | Optional.                                                 |
+| [n]        | Optional, if omitted, the string will store entire value. |
+| attribName | The name by which the variable will be invoked.           |
 
 <br>
 
@@ -34,7 +40,7 @@ OUTPUT(Address, NAMED('Address'));
 STRING8 Addr := '123 Main Rd, ATL, 30300, USA.';
 OUTPUT(Addr, NAMED('Addr'));
 
-// String concatenation 
+// String concatenation
 STRING FirstName := 'Sun';
 STRING LastName  := 'Shine';
 
