@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "install": "npm install",
+    "start": "gatsby develop"
+  }
+}
