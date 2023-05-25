@@ -1,0 +1,47 @@
+.hero-image-container {
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+}
+
+.hero-text-container {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.hero-text {
+  font-size: 35px;
+  position: relative;
+  /* left: 100%; */
+  /* animation: flyInText 1s forwards; */
+  text-align: left;
+  color: #002f6c;
+  /* width: 80%;  */
+  margin: 0 auto; /* Center the text horizontally */
+}
+
+.hero-subtext {
+  font-size: 22px;
+  position: relative;
+  left: 100%;
+  animation: flyInText 1s forwards;
+  text-align: left;
+  color: #ed1c24;
+  /* width: 80%;  */
+  margin: 0 auto; /* Center the text horizontally */
+}
+
+@keyframes flyInText {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}

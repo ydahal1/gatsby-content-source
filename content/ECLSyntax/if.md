@@ -9,9 +9,9 @@ The IF function allows you to make a logical comparison between value(s) and wha
 
 ## Syntax
 
-```java
+<EclCode>
 attr_name := IF(expression, true_result [, false_result])
-```
+<EclCode>
 
 | _Value_      | _Definition_                                     |
 | :----------- | :----------------------------------------------- |
@@ -27,13 +27,13 @@ attr_name := IF(expression, true_result [, false_result])
 <br>
 <pre id = 'IfExp_1'>
 
-```java
+<EclCode>
 /*
 IF Example:
 Example includes nested IF*/
 
 Permission := 23;
-Age        := 12;
+Age := 12;
 
 Res1 := IF(Permission >= Age, 'Application Accepted', 'Application Rejected');
 
@@ -41,16 +41,16 @@ Flag := FALSE;
 Res2 := IF(Flag, ', Try Again', ', Move on');
 
 Final := IF(Res1 = 'Application Accepted' AND Res2 = ', Move on',
-              OUTPUT(Res1 + Res2, NAMED('Passed')),
-              OUTPUT(Res1 + Res2, NAMED('Failed'))
-           );
+OUTPUT(Res1 + Res2, NAMED('Passed')),
+OUTPUT(Res1 + Res2, NAMED('Failed'))
+);
 
 Final;
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['IfExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['IfExp_1'])"> Try Me </a>
 
 ## Logical Operators
 
@@ -73,3 +73,5 @@ Logical values that can be used for comparison of two values.
 | IN       | To specify multiple possible values for a field/column             |
 | NOT IN   | To specify multiple possible values that are not in a field/column |
 | BETWEEN  | Between a certain range                                            |
+
+<EclCode>

@@ -1,7 +1,7 @@
 import { graphql } from "gatsby";
 import React from "react";
 import { Card } from "antd";
-import AppLayout from "../components/Layout";
+import AppLayout from "../components/layout/Layout";
 
 function ProjectDetails({ data }) {
   const { html } = data.markdownRemark;

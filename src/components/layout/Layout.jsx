@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { theme, Layout, ConfigProvider } from "antd";
-import SiteHeader from "./Header";
-import SiteFooter from "./Footer";
-import { globalContext } from "./ContextProvider/ContextProvider";
-import "./layout.css";
+import SiteHeader from "../header/Header";
+import SiteFooter from "../footer/Footer";
+import { globalContext } from "../ContextProvider/ContextProvider";
+import "./Layout.css";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 const { Content } = Layout;
@@ -16,11 +16,13 @@ function AppLayout({ children }) {
         algorithm: appTheme === "dark" ? darkAlgorithm : defaultAlgorithm,
       }}
     >
-      <Layout>
+      <div className="app__layout">
         <SiteHeader appTheme={appTheme} setAppTheme={setAppTheme} />
+        {/* <Layout style={{ padding: "20px" }}> */}
         <Content style={{ minHeight: "86vh" }}>{children}</Content>
         <SiteFooter>footer</SiteFooter>
-      </Layout>
+        {/* </Layout> */}
+      </div>
     </ConfigProvider>
   );
 }

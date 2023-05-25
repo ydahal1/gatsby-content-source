@@ -34,53 +34,51 @@ In this form TRANSFORM is called for each parent record with child record pair.
 <br>
 <pre id = 'NormExp_1'>
 
-```java
+<EclCode>
 /*
 Normalize Example:
 NORMALIZE All Records
 */
 
-// Child layout that's being extract  from parent
+// Child layout that's being extract from parent
 Child_Layout := RECORD
-    INTEGER1 NameID;
-    STRING20 Addr;
+INTEGER1 NameID;
+STRING20 Addr;
 END;
 
 // Parent Layout with child dataset
 Parent_Layout := RECORD
-    INTEGER1 NameID;
-    STRING20 Name;
-    DATASET(Child_Layout) Children; //Embedded child layout
+INTEGER1 NameID;
+STRING20 Name;
+DATASET(Child_Layout) Children; //Embedded child layout
 END;
 
 // Parent dataset with child dataset
 parentDS := DATASET([
-                       {1,'Kevin',   [ {1, '290 Downtown Abby'}] },
-                       {2,'Liz',     [ {2, '2345 Lake View Rd'}, {2, '776  Action Cir'}] },
-                       {3,'Jacob',   [ ]},
-                       {4,'Alex',    [ {4, '9000 Sunset Blvd'}] },
-                       {5,'Sally',   [ {5, '345 Fresh Start Str'}, {5,  '433 Union Dr'} ,
-                                       {5,  '777 Lookup Court'},   {5,  '222 Movie Str'} ] }
-                    ], Parent_Layout);
+{1,'Kevin', [ {1, '290 Downtown Abby'}] },
+{2,'Liz', [ {2, '2345 Lake View Rd'}, {2, '776 Action Cir'}] },
+{3,'Jacob', [ ]},
+{4,'Alex', [ {4, '9000 Sunset Blvd'}] },
+{5,'Sally', [ {5, '345 Fresh Start Str'}, {5, '433 Union Dr'} ,
+{5, '777 Lookup Court'}, {5, '222 Movie Str'} ] }
+], Parent_Layout);
 
 OUTPUT(parentDS, NAMED('parentDS'));
 
-
 Child_Layout xForm(Child_Layout Ri) := TRANSFORM
-     SELF := Ri;
+SELF := Ri;
 END;
 
 ExtractChild := NORMALIZE(parentDS,
-                         LEFT.Children, //Sending only the child dataset
-                         xForm(RIGHT));
-
+LEFT.Children, //Sending only the child dataset
+xForm(RIGHT));
 
 OUTPUT(ExtractChild, NAMED('ExtractChild'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['NormExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['NormExp_1'])"> Try Me </a>
 
 </br>
 
@@ -88,7 +86,7 @@ OUTPUT(ExtractChild, NAMED('ExtractChild'));
 
 ### All Records Syntax
 
-```java
+<EclCode>
 Child_Layout := RECORD
     FieldOne;
     FieldTwo;
@@ -96,21 +94,21 @@ END;
 
 //Parent Layout with child dataset
 Parent_Layout := RECORD
-    ...
-    ...
-    DATASET(Child_Layout) Children; //Embedded child layout
+...
+...
+DATASET(Child_Layout) Children; //Embedded child layout
 END;
 
 Child_Layout xForm(Child_Layout Ri) := TRANSFORM
-     SELF := Ri;
+SELF := Ri;
 END;
 
 attribName := NORMALIZE(ParentsDS,
-                         //Sending only the child dataset
-                         LEFT.Children,
-                         xForm(RIGHT)
-                         [,flags]);
-```
+//Sending only the child dataset
+LEFT.Children,
+xForm(RIGHT)
+[,flags]);
+<EclCode>
 
 ## Normalize With COUNTER
 
@@ -121,27 +119,27 @@ This NORMALIZE form calls TRANSFORM <n> times for each parent record. <n> does n
 <br>
 <pre id = 'Norm2Exp_1'>
 
-```java
+<EclCode>
 /*
 NORMALIZE with COUNTER Example
 */
 
 Parent_layout := RECORD
-  // The explicitCount defines:
-  // how many times transform should execute per record.
-  INTEGER explicitCount;
-  STRING  lastName;
-  STRING  phoneOne;
-  STRING  phoneTwo;
-  STRING  addressOne;
-  STRING  addressTwo;
-  STRING  addressThree;
+// The explicitCount defines:
+// how many times transform should execute per record.
+INTEGER explicitCount;
+STRING lastName;
+STRING phoneOne;
+STRING phoneTwo;
+STRING addressOne;
+STRING addressTwo;
+STRING addressThree;
 END;
 
 // Parent Dataset
 parentDS := DATASET([
-                {2, 'Alexa', '7701234567',  '', '123 Main Str', '404 capital cr', ''},
-                {2, 'Smith', '', '8890002323', '504 Sunset Blvd', '990 Rose highway', ''},
+{2, 'Alexa', '7701234567', '', '123 Main Str', '404 capital cr', ''},
+{2, 'Smith', '', '8890002323', '504 Sunset Blvd', '990 Rose highway', ''},
 
                 //Notice Adam has two phone numbers, but assigning 1 for number of execution
                 {1, 'Adam', '6789991111', '4445679000', '', '', ''},
@@ -149,16 +147,14 @@ parentDS := DATASET([
                 {3, 'Rosy', '2209875437', '', '8749 OceanFront main Rd','5671 North Lake Str', '2323 Washington RD'}],
                       Parent_layout);
 
-
 OUTPUT(parentDS, NAMED('parentDS'));
 
 child_layout := RECORD
-  INTEGER    countIt;
-  STRING     Name;
-  STRING     phone;
-  STRING     address;
+INTEGER countIt;
+STRING Name;
+STRING phone;
+STRING address;
 END;
-
 
 child_layout xForm(Parent_layout Li, INTEGER counting) := TRANSFORM
 
@@ -166,40 +162,39 @@ child_layout xForm(Parent_layout Li, INTEGER counting) := TRANSFORM
         SELF.name       := Li.lastName;
         SELF.phone      := CHOOSE(counting, Li.phoneOne, Li.phoneTwo);
         SELF.address    := CHOOSE(counting, Li.addressOne, Li.addressTwo, Li.addressThree);
+
 END;
 
 extractChild := NORMALIZE(parentDS,
-                          //Number of times transform should go through a record
-                          LEFT.explicitCount,
-                          xForm(LEFT,COUNTER));
+//Number of times transform should go through a record
+LEFT.explicitCount,
+xForm(LEFT,COUNTER));
 
 OUTPUT(extractChild, NAMED('extractChild'));
 
-
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['Norm2Exp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['Norm2Exp_1'])"> Try Me </a>
 
 </br>
 </br>
 
 ### With COUNTER Syntax
 
-```java
+<EclCode>
 
 Child_Layout := RECORD
-    ...
-    ...
+...
+...
 END;
 
 //Parent Layout with child dataset
 Parent_Layout := RECORD
-    INTEGER TheCounter;
-    ...
-    ...
+INTEGER TheCounter;
+...
+...
 END;
-
 
 Child_Layout xForm(Parent_layout Li, INTEGER counting) := TRANSFORM
 
@@ -211,11 +206,11 @@ Child_Layout xForm(Parent_layout Li, INTEGER counting) := TRANSFORM
 END;
 
 ExtractChildren := NORMALIZE(ParentDS,
-                            Expression, //Left.TheCounter
-                            xForm(LEFT,COUNTER)
-                            [,flags]);
+Expression, //Left.TheCounter
+xForm(LEFT,COUNTER)
+[,flags]);
 
-```
+<EclCode>
 
 ## Flags
 

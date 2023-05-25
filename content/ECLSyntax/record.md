@@ -23,7 +23,7 @@ RECORD functions the same way as CREATE TABLE in SQL.
 
 ### Syntax
 
-```java
+<EclCode>
 attr_layout := RECORD
     data_type    field1;
     data_type    field2;
@@ -32,13 +32,13 @@ attr_layout := RECORD
     ...
     data_type    field100;
 END;
-```
+<EclCode>
 
 ## Using Braces { }
 
 ### Syntax
 
-```java
+<EclCode>
 attr_layout := {
                data_type field1;
                data_type field2;
@@ -46,7 +46,7 @@ attr_layout := {
                ...
                data_type field100
                };
-```
+<EclCode>
 
 | _Value_             | _Definition_                                   |
 | :------------------ | :--------------------------------------------- |
@@ -56,7 +56,7 @@ attr_layout := {
 
 #### Example
 
-```java
+<EclCode>
 // Using keywords
 salaryAvg_1 := RECORD
             STRING  Job;
@@ -70,15 +70,17 @@ END;
 
 // Using { }
 salaryAvg_2 := {
-                STRING  Job;
-                STRING  Category;
-                STRING  City;
-                STRING2 State;
-                INTEGER AvgSalary;
-                INTEGER LowerBand;
-                INTEGER Upperband;
-                };
-```
+STRING Job;
+STRING Category;
+STRING City;
+STRING2 State;
+INTEGER AvgSalary;
+INTEGER LowerBand;
+INTEGER Upperband;
+};
+
+<EclCode>
 
 </br>
 </br>
+<EclCode>

@@ -12,31 +12,32 @@ CHOOSE function eEvaluates the expression and returns the value parameter wh
 <br>
 <pre id = 'ChooseExp_1'>
 
-```java
+<EclCode>
 /*
 CHOOSE Example:
 */
 
 Eval := 4;
 
-CHOOSE(Eval, 2, 3, 5, 6, 20);      // Returns 6
+CHOOSE(Eval, 2, 3, 5, 6, 20); // Returns 6
 
-CHOOSE(Eval, 6, 6, 7, 10, 9, 11);  // Returns 10
+CHOOSE(Eval, 6, 6, 7, 10, 9, 11); // Returns 10
 
-CHOOSE(Eval, 3, 4, 8);             // Returns 8 (the else value)
-```
+CHOOSE(Eval, 3, 4, 8); // Returns 8 (the else value)
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['ChooseExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ChooseExp_1'])"> Try Me </a>
 
 </br>
 </br>
 
 ## Syntax
 
-```java
+<EclCode>
 CHOOSE(Expression, Value1,... , ValueN, Else);
-```
+<EclCode>
 
 | _Value_         | _Definition_                                    |
 | :-------------- | :---------------------------------------------- |
@@ -49,22 +50,24 @@ CHOOSE(Expression, Value1,... , ValueN, Else);
 <br>
 <pre id = 'ChooseExp_2'>
 
-```java
+<EclCode>
 /*
 CHOOSE Example:
 */
 
-CHOOSE(2, 3, 5, 6, 20);          // Returns 5
+CHOOSE(2, 3, 5, 6, 20); // Returns 5
 
-CHOOSE(3, 'foo', 'bar', 'baz');  // Returns 'baz'
+CHOOSE(3, 'foo', 'bar', 'baz'); // Returns 'baz'
 
-getVal := CHOOSE(5, 'foo', 'bar', 'baz');  // Returns 'baz' (the else value)
+getVal := CHOOSE(5, 'foo', 'bar', 'baz'); // Returns 'baz' (the else value)
 
 OUTPUT(getVal, NAMED('getVal'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['ChooseExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ChooseExp_2'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

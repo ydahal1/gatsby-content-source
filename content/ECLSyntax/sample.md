@@ -9,9 +9,9 @@ SAMPLE function returns a sample set of dataset. Returned value is a dataset.
 
 ## Syntax
 
-```java
+<EclCode>
 SAMPLE(dataset, interval, [, which])
-```
+<EclCode>
 
 | Value    | Definition                                                                                                                                                       |
 | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,28 +42,30 @@ SAMPLE(dataset, interval, [, which])
 <br>
 <pre id="SampleExp_1">
 
-```java
+<EclCode>
 /*
 REAL Example:
 Collecting different sample sizes from the input dataset.
 */
 
 Color_Layout := RECORD
-    STRING   Color;
-    INTEGER ID;
+STRING Color;
+INTEGER ID;
 END;
 
 Color_DS := DATASET([
-                     {'Red', 100},    {'Blue', 102},   {'Black', 103},
-                     {'Yellow', 104}, {'Orange', 105}, {'White', 106},
-                     {'Green', 107},  {'Purple', 108}],
-                     Color_Layout);
+{'Red', 100}, {'Blue', 102}, {'Black', 103},
+{'Yellow', 104}, {'Orange', 105}, {'White', 106},
+{'Green', 107}, {'Purple', 108}],
+Color_Layout);
 
 SampleOne := SAMPLE(Color_DS, 3);
 OUTPUT(SampleOne, NAMED('SampleOne'));
 
 SAMPLE(Color_DS, 2, 4);
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['SampleExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['SampleExp_1'])"> Try Me </a>
+<EclCode>

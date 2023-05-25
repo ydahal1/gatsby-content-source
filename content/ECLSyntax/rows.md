@@ -12,74 +12,73 @@ ROWS keyword indicates the parameter being passed to the TRANSFORM function is a
 <br>
 <pre id = 'Rows_Exp1'>
 
-```java
+<EclCode>
 /*
 ROWS Example:
 */
 
 ParentLayout := RECORD
-    STRING      fName;
-    STRING      lName;
+STRING fName;
+STRING lName;
 END;
 
-
 parentDS := DATASET
-    (
-        [
-            {'Jane', 'Carpenter'},
-            {'Bill', 'Smith'},
-            {'Orville', 'Black'}
-        ],
-        ParentLayout
-    );
+(
+[
+{'Jane', 'Carpenter'},
+{'Bill', 'Smith'},
+{'Orville', 'Black'}
+],
+ParentLayout
+);
 
 OUTPUT(parentDS, NAMED('parentDS'));
 
-
 ChildrenLayout := RECORD
-    STRING      fName;
-    STRING      lName;
-    UNSIGNED1   age;
+STRING fName;
+STRING lName;
+UNSIGNED1 age;
 END;
 
 childrenDS := DATASET
-    (
-        [
-            {'Fiona', 'Black', 9},
-            {'Jack', 'Black', 18},
-            {'Martin', 'Carpenter', 10},
-            {'Stacey', 'Smith', 5},
-            {'Allison', 'Smith', 7}
-        ],
-        ChildrenLayout
-    );
+(
+[
+{'Fiona', 'Black', 9},
+{'Jack', 'Black', 18},
+{'Martin', 'Carpenter', 10},
+{'Stacey', 'Smith', 5},
+{'Allison', 'Smith', 7}
+],
+ChildrenLayout
+);
 
 OUTPUT(childrenDS, NAMED('childrenDS'));
 
 ParentChildLayout2 := RECORD
-    ParentLayout;
-    SET OF STRING   children;
+ParentLayout;
+SET OF STRING children;
 END;
 
 denorm2 := DENORMALIZE
-    (
-        parentDS,
-        childrenDS,
-        LEFT.lName = RIGHT.lName,
-        GROUP,
-        TRANSFORM
-            (
-                ParentChildLayout2,
-                SELF.children := SET(ROWS(RIGHT), fName),
-                SELF := LEFT
-            )
-    );
+(
+parentDS,
+childrenDS,
+LEFT.lName = RIGHT.lName,
+GROUP,
+TRANSFORM
+(
+ParentChildLayout2,
+SELF.children := SET(ROWS(RIGHT), fName),
+SELF := LEFT
+)
+);
 
 OUTPUT(denorm2, NAMED('denorm2'))
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['Rows_Exp1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['Rows_Exp1'])"> Try Me </a>
 
 </br>
 </br>
@@ -88,12 +87,12 @@ OUTPUT(denorm2, NAMED('denorm2'))
 
 When using ROWS you need to pass the dataset you are pointing to in the TRANSFORM. So ROWS can be used as ROWS(LEFT) or ROWS(RIGHT).
 
-```java
+<EclCode>
 function(LEFT_Dataset, RIGHT_Dataset,
                             LEFT.fieldName  = RIGHT.fieldName,
                             GROUP,
                             xForm(LEFT,ROWS(RIGHT)));
-```
+<EclCode>
 
 | _Value_                          | _Definition_                                                          |
 | :------------------------------- | :-------------------------------------------------------------------- |

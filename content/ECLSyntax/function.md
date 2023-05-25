@@ -18,14 +18,15 @@ A Function is a set of statements that take inputs, does some specific computati
 
 ## Syntax
 
-```java
+<EclCode>
 EXPORT [return_data_type] function_name (data_type arg [, data_type arg]+) := FUNCTION
 
     ecl_code
     RETURN return_value;
 
 END;
-```
+
+<EclCode>
 
 | _Value_          | _Definition_                                                                                                                                                                      |
 | :--------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -43,15 +44,15 @@ END;
 <br>
 <pre id = 'FuncExp_1'>
 
-```java
+<EclCode>
 /*
 Function Example:
 */
 
 EXPORT MyFunc (STRING Val) := FUNCTION
 
-   Result := 'Hello ' + Val + ' , welcome to this function';
-   RETURN Result;
+Result := 'Hello ' + Val + ' , welcome to this function';
+RETURN Result;
 
 END;
 
@@ -61,11 +62,10 @@ OUTPUT(Res, NAMED('res'));
 
 OUTPUT(MyFunc('Sunny'), NAMED('Sunny'));
 
-
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['FuncExp_1'])"> Try Me </a>
 
 ## Outputs in Function - Using WHEN
 
@@ -78,53 +78,51 @@ OUTPUT(MyFunc('Sunny'), NAMED('Sunny'));
 <br>
 <pre id = 'FuncExp_2'>
 
-```java
+<EclCode>
 /*
 Function Example:
 Outputting multiple values using WHEN.
 */
 
 Pop_Layout := RECORD
-    STRING   City;
-    STRING   State;
-    STRING   County;
-    INTEGER  Population;
+STRING City;
+STRING State;
+STRING County;
+INTEGER Population;
 END;
 Pop_DS := DATASET([
-                {'Dauphin Island','AL','Mobile',1335},
-                {'Guy','AR','Faulkner',778},
-                {'El Centro','CA','Imperial',111425},
-                {'Indio','CA','Riverside',417059},
-                {'Englewood','CO','Arapahoe',6183},
-                {'Keywest','FL','Monroe',31401}],
-                Pop_Layout);
-
+{'Dauphin Island','AL','Mobile',1335},
+{'Guy','AR','Faulkner',778},
+{'El Centro','CA','Imperial',111425},
+{'Indio','CA','Riverside',417059},
+{'Englewood','CO','Arapahoe',6183},
+{'Keywest','FL','Monroe',31401}],
+Pop_Layout);
 
 SomeFunc(DATASET(Pop_Layout) Pop_DS) := FUNCTION
-
 
     Str        := 'This is a WHEN example.';
     SomeFilter := Pop_DS(Pop_DS.Population >= 50000);
     MaxPop     := Pop_DS(Population = MAX(Pop_DS, Population));
 
-  SideActions := PARALLEL
-     (
-         OUTPUT(Pop_DS, NAMED('Pop_DS'));
-         OUTPUT(SomeFilter, NAMED('SomeFilter'));
-         OUTPUT(MaxPop, NAMED('MaxPop'));
-     );
+SideActions := PARALLEL
+(
+OUTPUT(Pop_DS, NAMED('Pop_DS'));
+OUTPUT(SomeFilter, NAMED('SomeFilter'));
+OUTPUT(MaxPop, NAMED('MaxPop'));
+);
 
-  RETURN WHEN(Str, SideActions);
+RETURN WHEN(Str, SideActions);
 END;
-
 
 // Calling the SomeFunc function
 
 SomeFunc(Pop_DS);
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['FuncExp_2'])"> Try Me </a>
 
 ## One Line Function
 
@@ -136,16 +134,16 @@ If you don’t have any ecl_code for the function, it is a one-liner. \
 <br>
 <pre id = 'FuncExp_3'>
 
-```java
+<EclCode>
 /*
 FUNCTION Example:
 One line function
 */
 
-UNSIGNED2 Squared(UNSIGNED1 n) := n * n;
+UNSIGNED2 Squared(UNSIGNED1 n) := n \* n;
 
 isEven(INTEGER num) := num % 2 = 0;
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['FuncExp_3'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['FuncExp_3'])"> Try Me </a>

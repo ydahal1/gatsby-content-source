@@ -23,7 +23,7 @@ A temporary dataset that's created and used while job is running. Inline dataset
 
 ### Syntax
 
-```java
+<EclCode>
 attr_layout := RECORD
     data_type    field1;
     ...
@@ -34,16 +34,17 @@ END;
 
 // Inline Dataset
 attr_name := DATASET(
-                        [
-                            {'', '', 0, '', FALSE, ..., ''},
-                            {'', '', 0, '', FALSE, ..., ''},
-                            {...},
-                            {...},
-                            {'', '', 0, '', FALSE, ..., ''}
-                        ],
-                        attr_layout
-                    );
-```
+[
+{'', '', 0, '', FALSE, ..., ''},
+{'', '', 0, '', FALSE, ..., ''},
+{...},
+{...},
+{'', '', 0, '', FALSE, ..., ''}
+],
+attr_layout
+);
+
+<EclCode>
 
 <br>
 
@@ -72,7 +73,7 @@ attr_name := DATASET(
 <br>
 <pre id="ds_example1">
 
-```java
+<EclCode>
 /*
 DATASET Example:
 Creating an inline dataset.
@@ -80,33 +81,31 @@ Creating an inline dataset.
 
 // Defining record layout
 SalaryAvg_Layout := RECORD
-    STRING   Job;
-    STRING   Category;
-    STRING   City;
-    STRING2  State;
-    INTEGER  Avg_Salary;
-    INTEGER  LowerBand;
-    INTEGER  Upperband;
+STRING Job;
+STRING Category;
+STRING City;
+STRING2 State;
+INTEGER Avg_Salary;
+INTEGER LowerBand;
+INTEGER Upperband;
 END;
 
 // Creating the dataset
 SalaryAvg_DS := DATASET([
-                    {'Manager', 'IT', 'Atlanta', 'GA', 87000, 62000, 114000},
-                    {'Director', 'IT', 'Atlanta', 'GA', 119000, 84000, 156000},
-                    {'Director', 'Art-Entertainment', 'Atlanta', 'GA', 100000, 70000, 133000},
-                    {'CIO', 'IT', 'Tampa', 'FL', '112000', '69000', 131000},
-                    {'Sales', 'General', 'Chicago', 'IL', 55000, 32000, 121000}],
-                    SalaryAvg_Layout);
-
+{'Manager', 'IT', 'Atlanta', 'GA', 87000, 62000, 114000},
+{'Director', 'IT', 'Atlanta', 'GA', 119000, 84000, 156000},
+{'Director', 'Art-Entertainment', 'Atlanta', 'GA', 100000, 70000, 133000},
+{'CIO', 'IT', 'Tampa', 'FL', '112000', '69000', 131000},
+{'Sales', 'General', 'Chicago', 'IL', 55000, 32000, 121000}],
+SalaryAvg_Layout);
 
 OUTPUT(SalaryAvg_DS, NAMED('SalaryAvg_DS'));
 
-
-```
+<EclCode>
 
 </pre>
 
-<a class="trybutton" href="javascript:OpenECLEditor(['ds_example1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ds_example1'])"> Try Me </a>
 
 </br>
 
@@ -116,7 +115,7 @@ A sprayed file on cluster. HPCC Systems supports different file formats such as 
 
 ### Syntax
 
-```java
+<EclCode>
 attr_layout := RECORD
     data_type    field1;
     ...
@@ -129,9 +128,10 @@ path := '~some::sample::path';
 
 //File Dataset
 attr_name := DATASET(path,
-                       attr_layout,
-                       file_type);
-```
+attr_layout,
+file_type);
+
+<EclCode>
 
 <br>
 
@@ -145,7 +145,7 @@ attr_name := DATASET(path,
 
 #### Example
 
-```java
+<EclCode>
 /*
 DATASET Example:
 Defining a logical file as input dataset.
@@ -153,19 +153,19 @@ Defining a logical file as input dataset.
 
 // Defining record layout
 SalaryAvg_Layout := RECORD
-    STRING   Job;
-    STRING   Category;
-    STRING   City;
-    STRING2  State;
-    INTEGER  Avg_Salary;
-    INTEGER  LowerBand;
-    INTEGER  Upperband;
+STRING Job;
+STRING Category;
+STRING City;
+STRING2 State;
+INTEGER Avg_Salary;
+INTEGER LowerBand;
+INTEGER Upperband;
 END;
 
 // Getting the dataset
 SalaryAvg_DS := DATASET('~sample::average::salary::dataset', SalaryAvg_Layout, THOR);
 
-```
+<EclCode>
 
 ### File Types
 

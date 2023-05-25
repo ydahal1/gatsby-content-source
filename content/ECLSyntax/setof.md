@@ -9,9 +9,9 @@ SET OF is an array of data element with the same data type. Indexing in SET OF s
 
 ## Syntax
 
-```java
+<EclCode>
 SET OF <dataType> attr_name := [elem1, elem2, ... elemN]
-```
+<EclCode>
 
 | Value     | Definition                                       |
 | :-------- | :----------------------------------------------- |
@@ -27,7 +27,7 @@ SET OF <dataType> attr_name := [elem1, elem2, ... elemN]
 <br>
 <pre id="SetOfExp_1">
 
-```java
+<EclCode>
 /*
 SET Example:
 Showing different examples  of SET OF.
@@ -39,7 +39,8 @@ OUTPUT(IntSet, NAMED('IntSet'));
 SET OF DECIMAL3_1 DecSet := [12, 12.1, 90.7, 90];
 OUTPUT(DecSet, NAMED('DecSet'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['SetOfExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['SetOfExp_1'])"> Try Me </a>
+<EclCode>

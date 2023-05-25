@@ -28,7 +28,7 @@ Modules can contain multiple, SHARED and EXPORT values.
 
 ## Syntax
 
-```java
+<EclCode>
 EXPORT module_name [ ( parameters ) ] := MODULE
     ...
     SHARED
@@ -36,7 +36,7 @@ EXPORT module_name [ ( parameters ) ] := MODULE
     ...
     EXPORT
 END
-```
+<EclCode>
 
 | _Value_         | _Definition_                                                           |
 | :-------------- | :--------------------------------------------------------------------- |
@@ -53,7 +53,7 @@ END
 <br>
 <pre id = 'ModExp_1'>
 
-```java
+<EclCode>
 /*
 MODULE Example:
 Simple MODULE using SHARED AND EXPORT
@@ -61,28 +61,29 @@ Simple MODULE using SHARED AND EXPORT
 
 MyMod := MODULE
 
-   SHARED ValOne := 12;
-   STRING StrOne := 'abc';
+SHARED ValOne := 12;
+STRING StrOne := 'abc';
 
-   EXPORT DoMath  :=  ValOne * 12;
-   EXPORT PrintIt := 'Mod is used';
+EXPORT DoMath := ValOne \* 12;
+EXPORT PrintIt := 'Mod is used';
 
 END;
 
 // Calling the module
 OUTPUT(myMod.PrintIt, NAMED('Mod_Call1'));
 OUTPUT(myMod.DoMath, NAMED('Mod_Call2'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['ModExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ModExp_1'])"> Try Me </a>
 
 </br>
 
 <br>
 <pre id = 'ModExp_2'>
 
-```java
+<EclCode>
 /*
 MODULE Example:
 Simple MODULE using FUNCTION
@@ -90,10 +91,9 @@ Simple MODULE using FUNCTION
 
 MyMod := MODULE
 
+STRING LocalVal := 'This is not visible after EXPORT or SHARED';
 
-   STRING LocalVal := 'This is not visible after EXPORT or SHARED';
-
-   EXPORT SimpleFun(STRING Day, INTEGER Num) := FUNCTION
+EXPORT SimpleFun(STRING Day, INTEGER Num) := FUNCTION
 
        Concat := 'Today is ' + Day + ' and your lucky number is: ' + Num;
        RETURN Concat;
@@ -115,9 +115,9 @@ OUTPUT(MyMod.SimpleFun('Sunday', 45), NAMED('SimpleFun'));
 
 Num := 12;
 OUTPUT(myMod.SimpleMath(Num), NAMED('SimpleMath'));
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['ModExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ModExp_2'])"> Try Me </a>
 
 </br>

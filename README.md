@@ -13,19 +13,21 @@
 
     Use the Gatsby CLI to create a new site, specifying the minimal starter.
 
-    ```shell
+    <EclCode>shell
+
     # create a new Gatsby site using the minimal starter
+
     npm init gatsby
-    ```
+    <EclCode>
 
 2.  **Start developing.**
 
     Navigate into your new site’s directory and start it up.
 
-    ```shell
+    <EclCode>shell
     cd my-gatsby-site/
     npm run develop
-    ```
+    <EclCode>
 
 3.  **Open the code and start customizing!**
 

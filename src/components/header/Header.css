@@ -1,0 +1,77 @@
+.applicationHeader {
+  display: flex;
+  align-items: center;
+  height: "70px";
+}
+
+/* -------------------------- */
+.header__appHeader {
+  display: flex;
+  font-size: large;
+  width: 100%;
+  place-items: center;
+  justify-content: space-between;
+  padding: 5px 0 5px 0;
+  /* background: gray; */
+}
+
+.header__appHeader > * {
+  margin-right: 20px;
+}
+
+.header__appHeader > * {
+  flex: 0 0 auto;
+}
+.header__searchBar_container {
+  flex-grow: 1;
+  max-width: 700px;
+}
+
+.header__logo_image img {
+  display: block; /* Ensures proper positioning of the image */
+  width: 150px; /* Makes the image fill its container div */
+  height: auto; /* Preserves the image's aspect ratio */
+}
+
+.header__navLinks {
+  display: flex;
+  place-items: center;
+}
+
+.header__navLinks > * {
+  margin-right: 19px;
+  font-weight: 600;
+  padding: 5px;
+}
+
+.header__navLinks > *:hover {
+  margin-right: 20px;
+  font-weight: 700;
+  color: gray;
+  cursor: pointer;
+}
+
+.header__navlink {
+  position: relative;
+}
+
+.header__navlink::after {
+  content: "  |";
+  position: absolute;
+  right: 0;
+  height: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: lightgray;
+  margin-right: -10px;
+}
+
+.header__themeToggle > * {
+  font-size: 35px;
+  font-weight: 900;
+  color: gray;
+}
+
+.header__themeToggle > *:hover {
+  /* color: gray; */
+}

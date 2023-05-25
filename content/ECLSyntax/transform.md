@@ -11,13 +11,13 @@ Transform can be used with PROJECT, JOIN, ITERATE, ROLLUP and more.
 
 ## Syntax
 
-```java
+<EclCode>
 EXPORT [return_dataset_layout] transform_name ([input_arguments_types]+ arg_name ) := TRANSFORM
       SELF.return_field_name := arg_name.input_dataset_fieldname;
       SELF := arg_name;
       SELF := [];
 END;
-```
+<EclCode>
 
 | Value                   | Definition                                                                                                                                                                                                                                                                                                              |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -52,67 +52,67 @@ If you need the transform to be used in multiple places, or it contains many fie
 <br>
 <pre id="TransformExp_1">
 
-```java
+<EclCode>
 /*
 TRANSFORM Example:
 Using an input dataset, to concat names and count the number of rows in the input dataset.
 PROJECT result always have the same number of rows as input dataset.
 */
 
-
 // Defining record layout
 Names_layout := RECORD
-    STRING FirstName;
-    STRING LastName;
+STRING FirstName;
+STRING LastName;
 END;
 
 // Creating Explicit dataset
 Names_DS := DATASET([
-              {'Sun','Shine'},
-              {'Blue','Moon'},
-              {'Silver','Rose'}],
-              Names_layout);
+{'Sun','Shine'},
+{'Blue','Moon'},
+{'Silver','Rose'}],
+Names_layout);
 
 // Defining new layout for the project result
 NameOutRec := RECORD
-    STRING  FirstName;
-    STRING  LastName;
-    STRING  CatValues;
-    INTEGER RecCount; //Counter
+STRING FirstName;
+STRING LastName;
+STRING CatValues;
+INTEGER RecCount; //Counter
 END;
 
-/*
+/_
 NameOutRec: Result of the project gets saved in this record layout
 CatThem: TRANSFORM name
 Names_layout L: Left datasets that’s passed through project
 INTEGER C: Counter
-*/
+_/
 NameOutRec CatThem(Names_layout L, INTEGER C) := TRANSFORM
 
-  // Contacting FirstName with LastName and adding space between them
-  SELF.CatValues := L.FirstName + ' ' + L.LastName;
-  SELF.RecCount := C; // Counter
-  // Assign default values to all fields that are in result dataset and haven't been define in this TRANSFORM
-  SELF := L;
+// Contacting FirstName with LastName and adding space between them
+SELF.CatValues := L.FirstName + ' ' + L.LastName;
+SELF.RecCount := C; // Counter
+// Assign default values to all fields that are in result dataset and haven't been define in this TRANSFORM
+SELF := L;
 
 END;
 
-/*
+/_
 Result: result dataset.
 PROJECT: Required, it can be replaced by other functions.
 Name_DS: Input dataset
 CatThem: TRANSFORM name
 LEFT: Refers to the left dataset. PROJECT always takes one dataset. So, LEFT is the only reference used.
 COUNTER: Counting the number of rows.
-*/
+_/
 Result := PROJECT(Names_DS,
-                 CatThem(LEFT, COUNTER));
+CatThem(LEFT, COUNTER));
 
 OUTPUT(Result, NAMED('Result'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TransformExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TransformExp_1'])"> Try Me </a>
 
 <br>
 
@@ -120,7 +120,7 @@ OUTPUT(Result, NAMED('Result'));
 
 Often times TRANSFORM is small enough to used within PROJECT, JOIN, ROLLUP and other functions. Let's take a look at how it can be used within PROJECT. Similar principal is applied in using transform with other functions mentioned above, at transform definition.
 
-```java
+<EclCode>
 EXPORT project_name := PROJECT(input_dataset,
                             TRANSFORM(
                                 return_dataset_layout
@@ -130,7 +130,7 @@ EXPORT project_name := PROJECT(input_dataset,
                                 SELF := [];
                             ));
 
-```
+<EclCode>
 
 | Value                   | Definition                                                                                                                                                                                                                                                                                                              |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -152,51 +152,52 @@ EXPORT project_name := PROJECT(input_dataset,
 <br>
 <pre id="TransformExp_2">
 
-```java
+<EclCode>
 
-/*
+/\*
 TRANSFORM Example:
 Using an input dataset, to concat names and count the number of rows in the input dataset.
 PROJECT result always have the same number of rows as input dataset.
 
 This TRANSFORM, PROJECT example provides the exact same result as above example.
 The only difference is the way TRANSFORM is written and called.
-*/
+\*/
 
 // Defining record layout
 Names_layout := RECORD
-    STRING FirstName;
-    STRING LastName;
+STRING FirstName;
+STRING LastName;
 END;
 
 // Creating inline dataset
 Names_DS := DATASET([
-              {'Sun','Shine'},
-              {'Blue','Moon'},
-              {'Silver','Rose'}],
-              Names_layout);
+{'Sun','Shine'},
+{'Blue','Moon'},
+{'Silver','Rose'}],
+Names_layout);
 
 // Defining new layout for the project result
 NameOutRec := RECORD
-    STRING  FirstName;
-    STRING  LastName;
-    STRING  CatValues;
-    INTEGER RecCount; //Counter
+STRING FirstName;
+STRING LastName;
+STRING CatValues;
+INTEGER RecCount; //Counter
 END;
 
 ProjResult := PROJECT(Names_DS,
-                    TRANSFORM(NameOutRec,
-                      // Concat FirstName and LastName
-                      SELF.CatValues := LEFT.FirstName + ' ' + LEFT.LastName;
-                      SELF.RecCount := COUNTER; // Counter
-                      SELF := LEFT // Assign everything from left recordset
-                    ));
+TRANSFORM(NameOutRec,
+// Concat FirstName and LastName
+SELF.CatValues := LEFT.FirstName + ' ' + LEFT.LastName;
+SELF.RecCount := COUNTER; // Counter
+SELF := LEFT // Assign everything from left recordset
+));
 
 OUTPUT(ProjResult, NAMED('ProjResult'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TransformExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TransformExp_2'])"> Try Me </a>
 
 <br>
+<EclCode>

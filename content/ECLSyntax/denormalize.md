@@ -65,51 +65,50 @@ Adam|0
 <pre className="ecl_example">
 <pre id="ecl_data">
 
-```java
+<EclCode>
 /*
 DENORMALIZE Example:
 Example on form one denormalization.
 */
 
 child_layout := RECORD
-  STRING     lastName;
-  STRING     phoneNum := '';   //Default to blank
-  STRING     address  := '';
+STRING lastName;
+STRING phoneNum := ''; //Default to blank
+STRING address := '';
 END;
 
 Parent_layout := RECORD
-    STRING  lastName;
-    INTEGER CountIt         := 0;
-    STRING  phoneNumOne     := '';
-    STRING  phoneNumTwo     := '';
-    STRING  addressOne      := '';
-    STRING  addressTwo      := '';
-    STRING  addressThree    := '';
+STRING lastName;
+INTEGER CountIt := 0;
+STRING phoneNumOne := '';
+STRING phoneNumTwo := '';
+STRING addressOne := '';
+STRING addressTwo := '';
+STRING addressThree := '';
 END;
 
 // Creating child dataset
 // In child layout phoneNum and address are defaulted to ''.
 // If we want to fill one field and not the other, we need to keep the order.
 
-childDS := DATASET([{'Carpenter',  '',             '123 Main Str'},
-                    {'Carpenter',  '7701234567',   '404 capital cr'},
-                    {'Smith',      '40401234567',  '990 Rose highway'},
-                    {'Black',      '',             '504 Sunset Blvd'},
-                    {'Adam',       '6789991111'                     },
-                    {'Black',      '5694023457'                     },
-                    {'Smith',      '2209875437'                     },
-                    {'Black',      '',             '8749 OceanFront main Rd'},
-                    {'Smith',      '',             '5671 North Lake Str'}],
-                            child_layout);
+childDS := DATASET([{'Carpenter', '', '123 Main Str'},
+{'Carpenter', '7701234567', '404 capital cr'},
+{'Smith', '40401234567', '990 Rose highway'},
+{'Black', '', '504 Sunset Blvd'},
+{'Adam', '6789991111' },
+{'Black', '5694023457' },
+{'Smith', '2209875437' },
+{'Black', '', '8749 OceanFront main Rd'},
+{'Smith', '', '5671 North Lake Str'}],
+child_layout);
 
 // In parents layout all fields besides lastName is defaulted to '', because they are getting populated
 // by child dataset.
 
 ParentDS := DATASET([{'Carpenter'},{'Smith'},
-                     {'Jackson'},  {'Black'},
-                     {'Raymond'},  {'Adam'}],
-                            Parent_layout);
-
+{'Jackson'}, {'Black'},
+{'Raymond'}, {'Adam'}],
+Parent_layout);
 
 Parent_layout xForm(Parent_layout Le, childDS Ri, INTEGER C) := TRANSFORM
 
@@ -125,12 +124,13 @@ Parent_layout xForm(Parent_layout Le, childDS Ri, INTEGER C) := TRANSFORM
     self := [];
 
 END;
-```
+
+<EclCode>
 
 </pre>
 <pre id='ecl_code'>
 
-```java
+<EclCode>
 DeNorm := DENORMALIZE(ParentDS, childDS,
                         LEFT.lastName = RIGHT.lastName,
                         xForm(LEFT,RIGHT,COUNTER));
@@ -143,33 +143,33 @@ OUTPUT(ParentDS, NAMED('ParentDS'));
 
 // Viewing denormalize result
 OUTPUT(DeNorm, NAMED('DeNorm'));
-```
+<EclCode>
 
 </pre>
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['ecl_code'], ['ecl_data'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['ecl_code'], ['ecl_data'])"> Try Me </a>
 
 </br>
 </br>
 
 ### Form One Syntax
 
-```java
+<EclCode>
 
 Child_Layout := RECORD
-    ...
-    ...
+...
+...
 END;
 
 //Parent Layout with child dataset
 Parent_Layout := RECORD
-    INTEGER TheCounter;
-    ParentField1;
-    ...
-    ChildField1;
-    ChildField2;
-    ChildField3;
-    ...
+INTEGER TheCounter;
+ParentField1;
+...
+ChildField1;
+ChildField2;
+ChildField3;
+...
 END;
 
 Parent_Layout xForm(Parent_layout Le, Child_Layout Ri, INTEGER OptCont) := TRANSFORM
@@ -185,15 +185,16 @@ Parent_Layout xForm(Parent_layout Le, Child_Layout Ri, INTEGER OptCont) := TRANS
     SELF.TheCounter := OptCont;
 
     SELF := Le;
+
 END;
 
 DeNorm := DENORMALIZE(ParentDS, ChildrenDS,
-                        //Condition
-                        LEFT.MatchingField = RIGHT.MatchingField,
-                        xForm(LEFT, RIGHT, COUNTER)
-                        [,flags]);
+//Condition
+LEFT.MatchingField = RIGHT.MatchingField,
+xForm(LEFT, RIGHT, COUNTER)
+[,flags]);
 
-```
+<EclCode>
 
 </br>
 
@@ -224,101 +225,98 @@ In this format TRANSFORM function takes at least two parameters. The difference
 <br>
 <pre id = 'Denorm2_Exp1'>
 
-```java
+<EclCode>
 /*
 DENORMALIZE Example:
 Example on form two denormalization.
 */
 
 ParentLayout := RECORD
-    STRING      fName;
-    STRING      lName;
+STRING fName;
+STRING lName;
 END;
 
-
 parentDS := DATASET
-    (
-        [
-            {'Jane', 'Carpenter'},
-            {'Bill', 'Smith'},
-            {'Orville', 'Black'}
-        ],
-        ParentLayout
-    );
+(
+[
+{'Jane', 'Carpenter'},
+{'Bill', 'Smith'},
+{'Orville', 'Black'}
+],
+ParentLayout
+);
 
 OUTPUT(parentDS, NAMED('parentDS'));
 
-
 ChildrenLayout := RECORD
-    STRING      fName;
-    STRING      lName;
-    UNSIGNED1   age;
+STRING fName;
+STRING lName;
+UNSIGNED1 age;
 END;
 
 childrenDS := DATASET
-    (
-        [
-            {'Fiona', 'Black', 9},
-            {'Jack', 'Black', 18},
-            {'Martin', 'Carpenter', 10},
-            {'Stacey', 'Smith', 5},
-            {'Allison', 'Smith', 7}
-        ],
-        ChildrenLayout
-    );
+(
+[
+{'Fiona', 'Black', 9},
+{'Jack', 'Black', 18},
+{'Martin', 'Carpenter', 10},
+{'Stacey', 'Smith', 5},
+{'Allison', 'Smith', 7}
+],
+ChildrenLayout
+);
 
 OUTPUT(childrenDS, NAMED('childrenDS'));
 
-
 EmbeddedChildLayout := RECORD
-    STRING      fName;
-    UNSIGNED1   age;
+STRING fName;
+UNSIGNED1 age;
 END;
 
 // Denorm result layout
 ParentChildLayout1 := RECORD
-    ParentLayout;
-    DATASET(EmbeddedChildLayout)    children;
+ParentLayout;
+DATASET(EmbeddedChildLayout) children;
 END;
 
 // Making room for child fields in parent layout
 preppedParents := PROJECT
-    (
-        parentDS,
-        TRANSFORM
-            (
-                ParentChildLayout1,
-                SELF := LEFT,
-                SELF := []
-            )
-    );
+(
+parentDS,
+TRANSFORM
+(
+ParentChildLayout1,
+SELF := LEFT,
+SELF := []
+)
+);
 
 OUTPUT(preppedParents, NAMED('preppedParents'));
 
 denorm := DENORMALIZE
-    (
-        preppedParents,
-        childrenDS,
-        LEFT.lName = RIGHT.lName,
-        TRANSFORM
-            (
-                ParentChildLayout1,
-                SELF.children := LEFT.children + ROW({RIGHT.fName, RIGHT.age}, EmbeddedChildLayout),
-                SELF := LEFT
-            )
-    );
+(
+preppedParents,
+childrenDS,
+LEFT.lName = RIGHT.lName,
+TRANSFORM
+(
+ParentChildLayout1,
+SELF.children := LEFT.children + ROW({RIGHT.fName, RIGHT.age}, EmbeddedChildLayout),
+SELF := LEFT
+)
+);
 OUTPUT(denorm, NAMED('denorm'));
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['Denorm2_Exp1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['Denorm2_Exp1'])"> Try Me </a>
 
 </br>
 </br>
 
 ### Form Two Syntax
 
-```java
+<EclCode>
 ChildLayout := RECORD
     Field1;
     Field2;
@@ -326,23 +324,23 @@ ChildLayout := RECORD
 END;
 
 ParentLayout := RECORD
-    INTEGER1 Num; //Optional
-    Field1;
-    Field2;
-    ...
-    DATASET(ChildLayout) Children;
+INTEGER1 Num; //Optional
+Field1;
+Field2;
+...
+DATASET(ChildLayout) Children;
 END;
 
-//PROJECT can be used to create parents datasets with embedded  children
+//PROJECT can be used to create parents datasets with embedded children
 
 Parent_Layout xForm(ParentsDS Le, ChildrenDS Ri, INTEGER C) := TRANSFORM
-    SELF.Num := C;
-    SELF.Children := Le.Children + Ri;
-    SELF := Le;
+SELF.Num := C;
+SELF.Children := Le.Children + Ri;
+SELF := Le;
 END;
 
 DeNorm := DENORMALIZE(ParentLayout, ChidLayout,
-                        LEFT.Field = RIGHT.Field,
+LEFT.Field = RIGHT.Field,
 
                         //Grouping the child layout records based on the matching condition
                         GROUP,
@@ -351,82 +349,80 @@ DeNorm := DENORMALIZE(ParentLayout, ChidLayout,
                                 COUNTER // Optional
                                 ));
 
-```
+<EclCode>
 
 #### Example
 
 <br>
 <pre id = 'Denorm2_Exp2'>
 
-```java
+<EclCode>
 /*
 DENORMALIZE Example:
 Example on form two denormalization using GROUP.
 */
 
 ParentLayout := RECORD
-    STRING      fName;
-    STRING      lName;
+STRING fName;
+STRING lName;
 END;
 
-
 parentDS := DATASET
-    (
-        [
-            {'Jane', 'Carpenter'},
-            {'Bill', 'Smith'},
-            {'Orville', 'Black'}
-        ],
-        ParentLayout
-    );
+(
+[
+{'Jane', 'Carpenter'},
+{'Bill', 'Smith'},
+{'Orville', 'Black'}
+],
+ParentLayout
+);
 
 OUTPUT(parentDS, NAMED('parentDS'));
 
-
 ChildrenLayout := RECORD
-    STRING      fName;
-    STRING      lName;
-    UNSIGNED1   age;
+STRING fName;
+STRING lName;
+UNSIGNED1 age;
 END;
 
 childrenDS := DATASET
-    (
-        [
-            {'Fiona', 'Black', 9},
-            {'Jack', 'Black', 18},
-            {'Martin', 'Carpenter', 10},
-            {'Stacey', 'Smith', 5},
-            {'Allison', 'Smith', 7}
-        ],
-        ChildrenLayout
-    );
+(
+[
+{'Fiona', 'Black', 9},
+{'Jack', 'Black', 18},
+{'Martin', 'Carpenter', 10},
+{'Stacey', 'Smith', 5},
+{'Allison', 'Smith', 7}
+],
+ChildrenLayout
+);
 
 OUTPUT(childrenDS, NAMED('childrenDS'));
 
 ParentChildLayout2 := RECORD
-    ParentLayout;
-    SET OF STRING   children;
+ParentLayout;
+SET OF STRING children;
 END;
 
 denorm2 := DENORMALIZE
-    (
-        parentDS,
-        childrenDS,
-        LEFT.lName = RIGHT.lName,
-        GROUP,
-        TRANSFORM
-            (
-                ParentChildLayout2,
-                SELF.children := SET(ROWS(RIGHT), fName),
-                SELF := LEFT
-            )
-    );
+(
+parentDS,
+childrenDS,
+LEFT.lName = RIGHT.lName,
+GROUP,
+TRANSFORM
+(
+ParentChildLayout2,
+SELF.children := SET(ROWS(RIGHT), fName),
+SELF := LEFT
+)
+);
 
 OUTPUT(denorm2, NAMED('denorm2'))
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['Denorm2_Exp2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['Denorm2_Exp2'])"> Try Me </a>
 
 </br>
 </br>

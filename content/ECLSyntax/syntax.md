@@ -10,12 +10,13 @@ label: Syntax
 - Definition operator is `:=`
 - Terminator for statement is `;`
 
-```java
+<EclCode>
  Val1 := 12;
  Val2 := 65;
 
- Result := Val1 + Val2;
-```
+Result := Val1 + Val2;
+
+<EclCode>
 
 ## Comment Out
 
@@ -23,19 +24,19 @@ label: Syntax
 
 `//` is used to comment out one line.
 
-```java
+<EclCode>
 // One line is commented out
 // X + Y = Z
-```
+<EclCode>
 
 **Block comment**
 
 `/* ..... */` is used for block commenting out.
 
-```java
+<EclCode>
 /* This is a block comment.
     It can be used to comment out multiple lines.*/
-```
+<EclCode>
 
 ## Field Access
 
@@ -44,11 +45,12 @@ You can use of object.property to access dataset fields and definitions.
 - `dataset.fieldName` Referencing an attribute from a module
 - `moduleName.definition` Referencing a field from dataset
 
-```java
+<EclCode>
 MyDataset.FieldName
 
 MyModule.ExportedValue
-```
+
+<EclCode>
 
 ## Statement Types
 
@@ -59,7 +61,7 @@ There are two types of coding in ECL. Definitions and Actions.
 <br>
 <pre id = "IntroExp_1">
 
-```java
+<EclCode>
 /*
 Action vs Definition Examples.
 */
@@ -69,7 +71,6 @@ STRING  Def2  := 'to action.';
 // Action: String concatenation
 Def1 + Def2;
 
-
 Val1 := 12;
 Val2 := 50;
 
@@ -78,10 +79,10 @@ SomeResult := Val1 + Val2;
 
 // Action: print result
 SomeResult;
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['IntroExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['IntroExp_1'])"> Try Me </a>
 
 </br>
 </br>
@@ -94,9 +95,9 @@ Assigning an expression to an attribute. Definitions can't not be executing unle
 
 `OUTPUT(Val);` is an Action and result would be 23.
 
-```java
+<EclCode>
 [attrib_type] attrib_name := value
-```
+<EclCode>
 
 | Value       | Definition                                       |
 | :---------- | :----------------------------------------------- |
@@ -108,10 +109,10 @@ Assigning an expression to an attribute. Definitions can't not be executing unle
 
 Action simply means "do something." Actions trigger execution of a workunit that produces results.
 
-```java
+<EclCode>
 OUTPUT('this is an action');
 SUM(1,2);
-```
+<EclCode>
 
 </br>
 
@@ -120,7 +121,7 @@ SUM(1,2);
 <br>
 <pre id = 'IntroExp_2'>
 
-```java
+<EclCode>
 /*
 Action vs Definition Examples.
 */
@@ -140,12 +141,13 @@ OUTPUT(NumOne, NAMED('ActionThis'));
 // Simple Actions, followings produce result
 'my first ECL code';
 1 + 4 + 5;
-2 * 3;
+2 \* 3;
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['IntroExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['IntroExp_2'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

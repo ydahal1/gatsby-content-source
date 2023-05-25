@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Button } from "antd";
 import { graphql } from "gatsby";
-import AppLayout from "../../components/Layout";
+import AppLayout from "../../components/layout/Layout";
 
 function Portfolio({ data }) {
   const projects = data.allMarkdownRemark.nodes;

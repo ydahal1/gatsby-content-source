@@ -9,9 +9,9 @@ INTEGER data type is an n-byte integer value. Valid values for n are: 1, 2, 3, 4
 
 ## Syntax
 
-```java
+<EclCode>
 [UNSIGNED] INTEGER attribName
-```
+<EclCode>
 
 | _Value_    | _Definition_                                    |
 | :--------- | :---------------------------------------------- |
@@ -26,7 +26,7 @@ INTEGER data type is an n-byte integer value. Valid values for n are: 1, 2, 3, 4
 <br>
 <pre id="TypeInt_Exp">
 
-```java
+<EclCode>
 /*
 INTEGER Examples.
 */
@@ -40,11 +40,12 @@ Val1 + Val2;
 Val3 := 67;
 Val4 := 10;
 
-Val3 * Val4;
-```
+Val3 \* Val4;
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TypeInt_Exp'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TypeInt_Exp'])"> Try Me </a>
 
 </br>
 
@@ -63,3 +64,4 @@ Val3 * Val4;
 
 </br>
 </br>
+<EclCode>

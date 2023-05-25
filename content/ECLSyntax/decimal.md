@@ -9,9 +9,9 @@ A packed decimal value of n total digits. If you have a fixed precision, use dec
 
 ## Syntax
 
-```java
+<EclCode>
 [UNSIGNED] DECIMALn [_y]  attribName
-```
+<EclCode>
 
 | _Value_    | _Definition_                                                                     |
 | :--------- | :------------------------------------------------------------------------------- |
@@ -30,7 +30,7 @@ Keep in mind that y should always be less than or equal to n, and max is 32 lead
 <br>
 <pre id = 'DecimalExp_1'>
 
-```java
+<EclCode>
 /*
 DECIMAL Examples.
 */
@@ -43,10 +43,12 @@ DECIMAL5_3 Num2 := 13.56;
 
 OUTPUT(Num1, NAMED('Num1'));
 OUTPUT(Num2, NAMED('Num2'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['DecimalExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['DecimalExp_1'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

@@ -15,7 +15,7 @@ Following examples show how you can simply view results. 'NAMED' allows you to l
 <br>
 <pre id="OutputExample">
 
-```java
+<EclCode>
 /*
 OUTPUT Examples.
 */
@@ -28,11 +28,12 @@ someVal := 'My First String';
 
 // Outputting the attribute
 OUTPUT(someVal, NAMED('someVal'));
-```
+
+<EclCode>
 
 </pre>
 
-<a class="trybutton" href="javascript:OpenECLEditor(['OutputExample'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['OutputExample'])"> Try Me </a>
 </br>
 </br>
 
@@ -49,10 +50,10 @@ OUTPUT is similar to SELECT in SQL.
 
 ## Syntax
 
-```java
+<EclCode>
 OUTPUT(dataset_name/attr_name);
 OUTPUT(dataset_name/attr_name, Named('display-name'));
-```
+<EclCode>
 
 <br>
 
@@ -80,7 +81,7 @@ OUTPUT(dataset_name/attr_name, Named('display-name'));
 <br>
 <pre id="DatasetExample">
 
-```java
+<EclCode>
 /*
 OUTPUT Examples.
 Outputting a dataset.
@@ -88,40 +89,42 @@ Outputting a dataset.
 
 // Defining record layout
 SalaryAvg_Layout := RECORD
-    STRING    Job;
-    STRING    Category;
-    STRING    City;
-    STRING2   State;
-    INTEGER   Avg_Salary;
-    INTEGER   LowerBand;
-    INTEGER   Upperband;
+STRING Job;
+STRING Category;
+STRING City;
+STRING2 State;
+INTEGER Avg_Salary;
+INTEGER LowerBand;
+INTEGER Upperband;
 END;
 
 // Creating the dataset
 SalaryAvg_DS := DATASET([
-                    {'Manager', 'IT', 'Atlanta', 'GA', 87000, 62000, 114000},
-                    {'Director', 'IT', 'Atlanta', 'GA', 119000, 84000, 156000},
-                    {'Director', 'Art-Entertainment', 'Atlanta', 'GA', 100000, 70000, 133000},
-                    {'CIO', 'IT', 'Tampa', 'FL', '112000', '69000', 131000},
-                    {'Sales', 'General', 'Chicago', 'IL', 55000, 32000, 121000}],
-                    SalaryAvg_Layout);
+{'Manager', 'IT', 'Atlanta', 'GA', 87000, 62000, 114000},
+{'Director', 'IT', 'Atlanta', 'GA', 119000, 84000, 156000},
+{'Director', 'Art-Entertainment', 'Atlanta', 'GA', 100000, 70000, 133000},
+{'CIO', 'IT', 'Tampa', 'FL', '112000', '69000', 131000},
+{'Sales', 'General', 'Chicago', 'IL', 55000, 32000, 121000}],
+SalaryAvg_Layout);
 
-/*
- Output with no label
- Note: When you have multiple  outputs with no labels(NAMED option),
+/_
+Output with no label
+Note: When you have multiple outputs with no labels(NAMED option),
 it might be difficult to identify them.
-*/
+_/
 
 OUTPUT(SalaryAvg_DS);
 SalaryAvg_DS;
 
 // Using NAMED
 OUTPUT(SalaryAvg_DS, NAMED('SalaryAvg_DS'));
-```
+
+<EclCode>
 
 </pre>
 
-<a class="trybutton" href="javascript:OpenECLEditor(['DatasetExample'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['DatasetExample'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

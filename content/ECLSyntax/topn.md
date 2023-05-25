@@ -12,7 +12,7 @@ In a <t style='color:pink'>sorted dataset </t> TOPN returns the n number of reco
 <br>
 <pre id = 'TopnExp_1'>
 
-```java
+<EclCode>
 /*
 TOPN Example:
 */
@@ -23,30 +23,28 @@ MyRec := RECORD
 END;
 
 MyDS := DATASET([{100, 28000, 'Sunny'}, {200, 5000, 'Jack'}, {300, 5000, 'Smith'},
-                 {200, 1000, 'Danny'}, {200, 7000, 'Able'},  {100, 25000, 'Doable'},
-                 {200, 1000, 'Nancy'}],
-                 MyRec);
-
+{200, 1000, 'Danny'}, {200, 7000, 'Able'}, {100, 25000, 'Doable'},
+{200, 1000, 'Nancy'}],
+MyRec);
 
 LastName := TOPN(MyDS, 5, LastName);
 OUTPUT(LastName, NAMED('LastName'));
 
 OUTPUT(TOPN(MyDS, 3, -Income), NAMED('Sorted_Income'));
 
-
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TopnExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TopnExp_1'])"> Try Me </a>
 
 </br>
 </br>
 
 ## Syntax
 
-```java
+<EclCode>
 TOPN(Dataset, Count, SortValues[,flag(s)]);
-```
+<EclCode>
 
 | _Value_    | _Definition_                            |
 | :--------- | :-------------------------------------- |

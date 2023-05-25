@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { Layout, Menu, Switch, Input } from "antd";
 import { BsMoonStars, BsBrightnessHigh } from "react-icons/bs";
 import { navigate, Link } from "gatsby";
-import logoDark from "../images/hpccsystems-logo-dark.png";
-import logoLight from "../images/hpccsystems-logo-light.png";
-// import { globalContext } from "./ContextProvider/ContextProvider";
+import logoDark from "../../images/hpccsystems-logo-dark.png";
+import logoLight from "../../images/hpccsystems-logo-light.png";
+import "./Header.css";
 
 const { Header } = Layout;
 const { Search } = Input;
@@ -29,24 +29,10 @@ function SiteHeader({ appTheme, setAppTheme }) {
   };
 
   return (
-    <Header
-      style={{
-        display: "flex",
-        alignItems: "center",
-        background: appTheme === "dark" ? "#141414" : "#FFFFFF",
-        height: "70px",
-        borderBottom: "1px solid #C8C9C7",
-        boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.3)",
-      }}
-    >
+    <Header className="applicationHeader" style={{ background: appTheme === "dark" ? "#141414" : "#f5f5f5" }}>
       <div className="demo-logo" style={{ maxWidth: "100%", height: "100%" }}>
         <Link to={"/"}>
-          <img
-            src={appTheme === "dark" ? logoDark : logoLight}
-            // src={logoDark}
-            alt="hpcc logo"
-            style={{ maxWidth: "auto", height: "100%", padding: "10px" }}
-          />
+          <img src={appTheme === "dark" ? logoDark : logoLight} alt="hpcc logo" style={{ maxWidth: "auto", height: "100%", padding: "10px" }} />
         </Link>
       </div>
       <Menu

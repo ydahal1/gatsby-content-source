@@ -9,9 +9,9 @@ A Boolean data type is a TRUE/FALSE expression.
 
 ## Syntax
 
-```java
+<EclCode>
 BOOLEAN attribName
-```
+<EclCode>
 
 | _Value_    | _Definition_                                    |
 | :--------- | :---------------------------------------------- |
@@ -23,7 +23,7 @@ BOOLEAN attribName
 <br>
 <pre id = 'BoolExp_1'>
 
-```java
+<EclCode>
 /*
 BOOLEAN Examples.
 */
@@ -37,10 +37,12 @@ OUTPUT(HasValidName, NAMED('HasValidName'));
 
 // Boolean evaluation
 OUTPUT(10 >= 2, NAMED('Evaluation'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['BoolExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['BoolExp_1'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

@@ -80,7 +80,7 @@ OUTPUT(SortedIncome, NAMED('Asc_SortedIncome'));
 </EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['SortExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['SortExp_1'])"> Try Me </a>
 
 ## Descending Sort
 
@@ -123,4 +123,4 @@ SortedIncome := SORT(AllPeople, -LastName, avgHouseIncome);
 OUTPUT(SortedIncome, NAMED('Asc_SortedIncome'));</EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['SortExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['SortExp_2'])"> Try Me </a>

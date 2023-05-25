@@ -1,0 +1,14 @@
+.site__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer_socialIcons {
+  font-size: 20px;
+  color: gray;
+}
+
+.footer_socialIcons > * {
+  margin-right: 10px;
+  padding: 5px;
+}

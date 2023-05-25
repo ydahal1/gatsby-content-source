@@ -16,7 +16,7 @@ MAP Characteristics
 
 ## Syntax
 
-```java
+<EclCode>
 attr_name := MAP(expression1 => value1,
                  expression2 => value2,
                  ...
@@ -24,7 +24,7 @@ attr_name := MAP(expression1 => value1,
                  expressionN => valueN
                  [,else_value]
                  )
-```
+<EclCode>
 
 </br>
 
@@ -42,24 +42,25 @@ attr_name := MAP(expression1 => value1,
 <br>
 <pre id = 'MapExp_1'>
 
-```java
+<EclCode>
 /*
 MAP Example:
 */
 
 Value := 120;
 
-Assessment := MAP(Value BETWEEN  0   AND 50   => 'Under Estimated',
-                  Value BETWEEN  51  AND 100  => 'About Right',
-                  Value BETWEEN  101 AND 150  => 'Still Acceptable',
-                  Value BETWEEN  151 AND 200  => 'Too High',
-                 'Rejected');
+Assessment := MAP(Value BETWEEN 0 AND 50 => 'Under Estimated',
+Value BETWEEN 51 AND 100 => 'About Right',
+Value BETWEEN 101 AND 150 => 'Still Acceptable',
+Value BETWEEN 151 AND 200 => 'Too High',
+'Rejected');
 
 OUTPUT(Assessment, NAMED('Assessment'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['MapExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['MapExp_1'])"> Try Me </a>
 
 ## Logical Operators
 
@@ -83,28 +84,27 @@ Logical values that can be used for comparison of two values.
 <br>
 <pre id = 'MapExp_2'>
 
-```java
+<EclCode>
 /*
 MAP Example:
 Using logical operations
 */
 
-
-Value  := 100;
-Flag   := False;
+Value := 100;
+Flag := False;
 Letter := 'A';
 
-Assessment := MAP(Value BETWEEN  0   AND 50    OR  Flag  => 'Under Estimated',
-                  Value BETWEEN  51  AND 100  AND ~Flag => 'About Right',
-                  Value BETWEEN  101 AND 150 AND ~Flag AND Letter = 'A' => 'Still Acceptable',
-                  Value BETWEEN  151 AND 200 => 'Too High',
-                  'Rejected');
+Assessment := MAP(Value BETWEEN 0 AND 50 OR Flag => 'Under Estimated',
+Value BETWEEN 51 AND 100 AND ~Flag => 'About Right',
+Value BETWEEN 101 AND 150 AND ~Flag AND Letter = 'A' => 'Still Acceptable',
+Value BETWEEN 151 AND 200 => 'Too High',
+'Rejected');
 
 OUTPUT(Assessment, NAMED('Assessment'));
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['MapExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['MapExp_2'])"> Try Me </a>
 
 </br>
 

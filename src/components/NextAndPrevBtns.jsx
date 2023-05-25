@@ -28,7 +28,7 @@ function NextAndPrevBtns() {
       ) : (
         <Button
           type="primary"
-          style={{ background: "red" }}
+          size="large"
           onClick={() => {
             alert("prev");
           }}
@@ -36,7 +36,7 @@ function NextAndPrevBtns() {
           Previous
         </Button>
       )}
-      <Button type="primary" onClick={handleGoToNext}>
+      <Button type="primary" size="large" onClick={handleGoToNext}>
         Next
       </Button>
     </div>

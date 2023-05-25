@@ -16,7 +16,7 @@ There is at least one field using an aggregate function with the keyword Groupin
 
 ## Syntax
 
-```java
+<EclCode>
 /*** Stand-alone record definition ***/
 out_record_def := RECORD
               dataset.field;
@@ -29,12 +29,12 @@ out_record_def := RECORD
 END;
 
 attr_name := TABLE(dataset,
-                    out_record_def,
-                    grouping-conditions
-                    [, flags]
-                    );
+out_record_def,
+grouping-conditions
+[, flags]
+);
 
-```
+<EclCode>
 
 | _Value_            | _Definition_                                                                                                                       |
 | :----------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
@@ -47,7 +47,7 @@ attr_name := TABLE(dataset,
 | grouping_condition | One or more comma-delimited expressions. Please see Grouping Condition for more information                                        |
 | flags              | Optional flags that can alter the behavior of TABLE                                                                                |
 
-```java
+<EclCode>
 /*** Implicit record definition ***/
 attr_name := TABLE(dataset,
                     {
@@ -63,8 +63,7 @@ attr_name := TABLE(dataset,
                     [, flags]
                     );
 
-
-```
+<EclCode>
 
 | _Value_            | _Definition_                                                                   |
 | :----------------- | :----------------------------------------------------------------------------- |
@@ -120,45 +119,45 @@ The GROUP keyword is used within output format parameter (RECORD Structure) of a
 <br>
 <pre id = 'TableExp_1'>
 
-```java
+<EclCode>
 /*
 TABLE Example:
 TABLE is used with aggregations
 */
 
 // Input layout
-Fare_Layout  :=  RECORD
-    STRING Pickup_Date;
-    REAL   Fare;
-    REAL   Distance;
+Fare_Layout := RECORD
+STRING Pickup_Date;
+REAL Fare;
+REAL Distance;
 END;
 
 // Input dataset
 FareDS := DATASET([
-                   {'1/1/2021', 25.1, 15.5}, {'1/2/2021', 40.15,7.2},
-                   {'1/3/2021', 25.36, 6.5}, {'1/2/2021', 120, 23},
-                   {'1/3/2021', 30, 60.75}, {'2/2/2021', 25, 71},
-                   {'1/2/2021', 10, 2.2}, {'3/10/2021', 45, 12.23}],
-                   Fare_Layout);
+{'1/1/2021', 25.1, 15.5}, {'1/2/2021', 40.15,7.2},
+{'1/3/2021', 25.36, 6.5}, {'1/2/2021', 120, 23},
+{'1/3/2021', 30, 60.75}, {'2/2/2021', 25, 71},
+{'1/2/2021', 10, 2.2}, {'3/10/2021', 45, 12.23}],
+Fare_Layout);
 
 // Defining all fields for the table
 AvgRide_Layout := RECORD
-   fareDS.pickup_date;                   // Calling specific field from input dataset
-   avgFare   := AVE(GROUP, fareDS.fare); // Calculating avg fare per each group
-   totalFare := SUM(GROUP, fareDS.fare); // Calculating total fare per each group
+fareDS.pickup_date; // Calling specific field from input dataset
+avgFare := AVE(GROUP, fareDS.fare); // Calculating avg fare per each group
+totalFare := SUM(GROUP, fareDS.fare); // Calculating total fare per each group
 END;
 
-crossTabDs := TABLE(FareDS,           // Input dataset. please see dataset above
-                     AvgRide_Layout,  // Result table definition
-                     pickup_date      // Grouping field
-                     );
+crossTabDs := TABLE(FareDS, // Input dataset. please see dataset above
+AvgRide_Layout, // Result table definition
+pickup_date // Grouping field
+);
 
 OUTPUT(crossTabDs, NAMED('crossTabDs'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TableExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TableExp_1'])"> Try Me </a>
 
 </br>
 </br>
@@ -182,56 +181,54 @@ OUTPUT(crossTabDs, NAMED('crossTabDs'));
 <br>
 <pre id = 'TableExp_2'>
 
-```java
+<EclCode>
 /*
 TABLE Example:
 Cross table example.
 */
 
 AllPeople_Layout := RECORD
-  UNSIGNED  PersonID;
-  STRING15  FirstName;
-  STRING25  LastName;
-  BOOLEAN   isEmployed;
-  UNSIGNED  AvgIncome;
-  INTEGER   EmpGroupNum;
+UNSIGNED PersonID;
+STRING15 FirstName;
+STRING25 LastName;
+BOOLEAN isEmployed;
+UNSIGNED AvgIncome;
+INTEGER EmpGroupNum;
 END;
 
-
 AllPeopleDS := DATASET([
-                       {1102,'Fred','Smith', FALSE, 1000, 900},
-                       {3102,'Fact','Smith', TRUE, 200000, 100},
-                       {1012,'Joe','Blow', TRUE, 11250, 200},
-                       {2085,'Blue','Moon', TRUE, 185000, 500},
-                       {3055,'Silver','Jo', FALSE, 5000, 900},
-                       {1265,'Darling','Jo', TRUE, 5000, 100},
-                       {1265,'Darling','Alex', TRUE, 5000, 100},
-                       {5265,'Blue','Silver', TRUE, 75000, 200},
-                       {7333,'Jane','Smith', FALSE, 50000, 900},
-                       {6023,'Alex','Silver',TRUE, 102000, 200},
-                       {1024,'Nancy','Moon', TRUE, 201100, 700}],
-                       AllPeople_Layout);
+{1102,'Fred','Smith', FALSE, 1000, 900},
+{3102,'Fact','Smith', TRUE, 200000, 100},
+{1012,'Joe','Blow', TRUE, 11250, 200},
+{2085,'Blue','Moon', TRUE, 185000, 500},
+{3055,'Silver','Jo', FALSE, 5000, 900},
+{1265,'Darling','Jo', TRUE, 5000, 100},
+{1265,'Darling','Alex', TRUE, 5000, 100},
+{5265,'Blue','Silver', TRUE, 75000, 200},
+{7333,'Jane','Smith', FALSE, 50000, 900},
+{6023,'Alex','Silver',TRUE, 102000, 200},
+{1024,'Nancy','Moon', TRUE, 201100, 700}],
+AllPeople_Layout);
 
 VerticalSlice := Table(AllPeopleDS,
-                        {
-                          LastName,
-                          isEmployed
-                        },
-                        LastName, isEmployed);
+{
+LastName,
+isEmployed
+},
+LastName, isEmployed);
 OUTPUT(VerticalSlice, NAMED('VerticalSlice'));
 
-
 AvgIncome := TABLE(AllPeopleDS,
-                    {
-                      LastName,
-                      AvgHouseIncome := AVE(GROUP, AvgIncome)
-                    },
-                    LastName);
+{
+LastName,
+AvgHouseIncome := AVE(GROUP, AvgIncome)
+},
+LastName);
 
 OUTPUT(AvgIncome, NAMED('AvgIncome'));
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TableExp_2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TableExp_2'])"> Try Me </a>
 
 </br>

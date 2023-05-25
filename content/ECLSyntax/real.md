@@ -9,9 +9,9 @@ REAL data type is an n-byte standard IEEE floating point value. Valid values are
 
 ## Syntax
 
-```java
+<EclCode>
 REAL [n] attribName
-```
+<EclCode>
 
 | _Value_    | _Definition_                                                                     |
 | :--------- | :------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ REAL [n] attribName
 <br>
 <pre id="TypeReal_Exp">
 
-```java
+<EclCode>
 /*
 REAL Examples.
 */
@@ -45,10 +45,11 @@ OUTPUT(Real_Num1, NAMED('Real_Num1'));
 OUTPUT(Real_Num2, NAMED('Real_Num2'));
 OUTPUT( Real_Num1 + Real_Num2, NAMED('TotalSum'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['TypeReal_Exp'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['TypeReal_Exp'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

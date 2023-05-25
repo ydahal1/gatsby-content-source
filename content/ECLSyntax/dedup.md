@@ -12,9 +12,9 @@ To use DEDUP you dataset must be **sorted**.
 
 ## Syntax
 
-```java
+<EclCode>
 DEDUP(dataset, [, condition])
-```
+<EclCode>
 
 | Value     | Definition                                                                                           |
 | :-------- | :--------------------------------------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ DEDUP(dataset, [, condition])
 <br>
 <pre id="DedupExp_1">
 
-```java
+<EclCode>
 /*
 DEDUP Example:
 Deduping the input dataset based on different fields.
@@ -54,27 +54,26 @@ Keep in mind that for DEDUP your dataset must be sorted.
 */
 
 Student_Rec := RECORD
-  INTEGER   StudentID;
-  STRING    Name;
-  STRING    City;
-  STRING2   State;
-  STRING5   ZipCode;
-  STRING    Department;
+INTEGER StudentID;
+STRING Name;
+STRING City;
+STRING2 State;
+STRING5 ZipCode;
+STRING Department;
 END;
 
 Student_DS := DATASET([
-              {300,	'Sarah', 'Dallas',	'Te',	'30000',	'Art'},
-              {400,	'Matt',	 	'',		     '',  '',       'Medical'},
-              {305,	'Liz',	 'Atlanta',	'GA',	'30330',  'Math'},
-              {305,	'Liz',	 'smyrna',	'GA',	'30330',  ''},
-              {100,	'Zoro',	 'Atlanta',	'GA',	'30330',  ''},
-              {100,	'Zoro',  'smyrna',	'GA',	'30330',  ''},
-              {800,	'Sandy', '',		     '',  '',       'Science'},
-              {604, 'Danny', 'Newyork',	'NY',	'40001',  ''},
-              {409,	'Dan',   'Newyork',	'NY',	'40001',	'Medical'},
-              {300,	'Sarah', 'Dallas',	'Te',	'30000',	'Math'}],
-              Student_Rec);
-
+{300, 'Sarah', 'Dallas', 'Te', '30000', 'Art'},
+{400, 'Matt', '', '', '', 'Medical'},
+{305, 'Liz', 'Atlanta', 'GA', '30330', 'Math'},
+{305, 'Liz', 'smyrna', 'GA', '30330', ''},
+{100, 'Zoro', 'Atlanta', 'GA', '30330', ''},
+{100, 'Zoro', 'smyrna', 'GA', '30330', ''},
+{800, 'Sandy', '', '', '', 'Science'},
+{604, 'Danny', 'Newyork', 'NY', '40001', ''},
+{409, 'Dan', 'Newyork', 'NY', '40001', 'Medical'},
+{300, 'Sarah', 'Dallas', 'Te', '30000', 'Math'}],
+Student_Rec);
 
 // Above dataset is already sorted.
 
@@ -84,7 +83,8 @@ OUTPUT(DupMe, NAMED('DupMe'));
 DupExp := DEDUP(SortDS, Name, Department);
 OUTPUT(DupExp, NAMED('DupExp'));
 
-```
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['DedupExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['DedupExp_1'])"> Try Me </a>
+<EclCode>

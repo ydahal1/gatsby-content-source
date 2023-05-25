@@ -9,9 +9,9 @@ STRING data type is a sequence of characters, digits, and special characters inc
 
 ## Syntax
 
-```java
+<EclCode>
 STRING[n] attribName
-```
+<EclCode>
 
 | _Value_    | _Definition_                                              |
 | :--------- | :-------------------------------------------------------- |
@@ -26,12 +26,12 @@ STRING[n] attribName
 </br>
 <pre id = 'String_Exp_1'>
 
-```java
+<EclCode>
 
-/*
+/_
 STRING Example:
 Examples of defining string values, concatenation, and using them in OUTPUT.
-*/
+_/
 
 Address := '123 Main Rd, ATL, 30300, USA.';
 OUTPUT(Address, NAMED('Address'));
@@ -42,13 +42,15 @@ OUTPUT(Addr, NAMED('Addr'));
 
 // String concatenation
 STRING FirstName := 'Sun';
-STRING LastName  := 'Shine';
+STRING LastName := 'Shine';
 
 OUTPUT(FirstName + ' ' + LastName, NAMED('Concatenation'));
-```
+
+<EclCode>
 
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['String_Exp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['String_Exp_1'])"> Try Me </a>
 
 </br>
 </br>
+<EclCode>

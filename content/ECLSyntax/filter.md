@@ -12,19 +12,20 @@ When using filter on STRING values keep in mind that STRING values are case sens
 
 Filter is similar to SELECT. In ECL the filtering fields are in ( ).
 
-```java
+<EclCode>
 // SQL
 SELECT name, address FROM PeopleDS WHERE name = 'Jo';
 
 // ECL
 OUTPUT(peopleDS(name = 'Jo'));
-```
+
+<EclCode>
 
 ### Syntax
 
-```java
+<EclCode>
 attr_name := dataset_name (filtering condition(s));
-```
+<EclCode>
 
 | Value                  | Definition                                                                                                    |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------ |
@@ -52,7 +53,7 @@ attr_name := dataset_name (filtering condition(s));
 <br>
 <pre id="FilterExp_1">
 
-```java
+<EclCode>
 /*
 FILTER Example:
 Showing different examples of FILTER function
@@ -61,22 +62,22 @@ based on different fields or logical operator.
 
 // Creating record layout
 Emp_layout := RECORD
-    INTEGER  PersonID;
-    STRING   FirstName;
-    STRING   LastName;
-    BOOLEAN  IsEmp;
-    INTEGER  RoundedIncome;
+INTEGER PersonID;
+STRING FirstName;
+STRING LastName;
+BOOLEAN IsEmp;
+INTEGER RoundedIncome;
 END;
 
 // Creating an inline dataset
 Emp_DS := DATASET([
-                {102,'Fred','Smith',FALSE,0},
-                {012,'Joe','Blow',TRUE,11250},
-                {085,'Blue','Moon',TRUE,185000},
-                {055,'Silver','Jo',FALSE,5000},
-                {265,'Darling','Jo',TRUE,5000},
-                {333,'Jane','Smith',FALSE,50000}],
-                Emp_layout);
+{102,'Fred','Smith',FALSE,0},
+{012,'Joe','Blow',TRUE,11250},
+{085,'Blue','Moon',TRUE,185000},
+{055,'Silver','Jo',FALSE,5000},
+{265,'Darling','Jo',TRUE,5000},
+{333,'Jane','Smith',FALSE,50000}],
+Emp_layout);
 
 // Filter Smith last name
 GetSmith := Emp_DS(LastName='Smith');
@@ -85,10 +86,9 @@ OUTPUT(GetSmith, NAMED('GetSmith'));
 // Notice that following filter will return an empty dataset
 OUTPUT(Emp_DS(LastName='smith'), NAMED('Case_Sensitive'));
 
-
 // Filter unemployed with income using logical operators
 IsWorking := Emp_DS(IsEmp = FALSE AND
-                    RoundedIncome > 0);
+RoundedIncome > 0);
 
 OUTPUT(IsWorking, NAMED('IsWorking'));
 
@@ -97,12 +97,11 @@ OUTPUT(IsWorking, NAMED('IsWorking'));
 // Emp_DS(IsEmp = TRUE)
 OUTPUT(Emp_DS(IsEmp), NAMED('Employed'));
 
-
-```
+<EclCode>
 
 </pre>
 
-<a class="trybutton" href="javascript:OpenECLEditor(['FilterExp_1'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['FilterExp_1'])"> Try Me </a>
 <br>
 <br>
 
@@ -132,47 +131,46 @@ OUTPUT(Emp_DS(IsEmp), NAMED('Employed'));
 <pre className="FilterExp_2">
 <pre id="file2" className="ecl_data">
 
-```java
+<EclCode>
 /*
 Filter Example
 */
 
-/*
+/_
 Filter Example
-*/
+_/
 StrokRec := RECORD
-    STRING   ID;
-    STRING   Gender;
-    INTEGER  Age;
-    BOOLEAN  Hypertension;
-    BOOLEAN  Heart_Disease;
-    STRING   Ever_Married;
-    STRING   Work_Type;
-    STRING   Residence_Type;
-    STRING   Avg_Glucose_Level;
-    STRING   BMI;
-    STRING   Smoking_status;
-    BOOLEAN  Stroke;
+STRING ID;
+STRING Gender;
+INTEGER Age;
+BOOLEAN Hypertension;
+BOOLEAN Heart_Disease;
+STRING Ever_Married;
+STRING Work_Type;
+STRING Residence_Type;
+STRING Avg_Glucose_Level;
+STRING BMI;
+STRING Smoking_status;
+BOOLEAN Stroke;
 END;
-
 
 StrokDS := DATASET('~raw::healthcare-dataset-stroke-data.csv', StrokRec, CSV(HEADING(1)));
 
-```
+<EclCode>
 
 </pre>
 <pre id='code2' className="ecl_code">
 
-```java
+<EclCode>
 // Filtering men over age of 80
 Over80 := StrokDS(Age >= 80);
 OUTPUT(Over80, NAMED('Over80'));
 
-```
+<EclCode>
 
 </pre>
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['code2'], ['file2'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['code2'], ['file2'])"> Try Me </a>
 </br>
 </br>
 
@@ -182,44 +180,43 @@ OUTPUT(Over80, NAMED('Over80'));
 <pre className="FilterExp_3">
 <pre id="file3" className="ecl_data">
 
-```java
+<EclCode>
 /*
 Filter Example
 */
 
-/*
+/_
 Filter Example
-*/
+_/
 StrokRec := RECORD
-    STRING   ID;
-    STRING   Gender;
-    INTEGER  Age;
-    BOOLEAN  Hypertension;
-    BOOLEAN  Heart_Disease;
-    STRING   Ever_Married;
-    STRING   Work_Type;
-    STRING   Residence_Type;
-    STRING   Avg_Glucose_Level;
-    STRING   BMI;
-    STRING   Smoking_status;
-    BOOLEAN  Stroke;
+STRING ID;
+STRING Gender;
+INTEGER Age;
+BOOLEAN Hypertension;
+BOOLEAN Heart_Disease;
+STRING Ever_Married;
+STRING Work_Type;
+STRING Residence_Type;
+STRING Avg_Glucose_Level;
+STRING BMI;
+STRING Smoking_status;
+BOOLEAN Stroke;
 END;
-
 
 StrokDS := DATASET('~raw::healthcare-dataset-stroke-data.csv', StrokRec, CSV(HEADING(1)));
 
-```
+<EclCode>
 
 </pre>
 <pre id='code3' className="ecl_code">
 
-```java
+<EclCode>
 // Over 80 years old men with heart disease
 OUTPUT(StrokDS(Gender = 'Male' AND Age >= 80 AND Heart_Disease), NAMED('Males'));
-```
+<EclCode>
 
 </pre>
 </pre>
-<a class="trybutton" href="javascript:OpenECLEditor(['code3'], ['file3'])"> Try Me </a>
+<a className="trybutton" href="javascript:OpenECLEditor(['code3'], ['file3'])"> Try Me </a>
 </br>
 </br>
